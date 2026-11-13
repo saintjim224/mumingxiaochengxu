@@ -1,0 +1,1067 @@
+/* 今天 · 首屏态势 */
+
+page {
+  background: var(--paper);
+}
+
+.home {
+  display: flex;
+  flex-direction: column;
+  gap: 14rpx;
+  min-height: 100vh;
+  /* 首页是 tabBar 页面，底部安全区已由原生 tabBar 承担，这里不再重复留白 */
+  padding: 20rpx 28rpx 18rpx;
+  justify-content: space-between;
+}
+
+/* ---------- 顶部 ---------- */
+
+.home-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16rpx;
+  min-height: 64rpx;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  min-width: 0;
+}
+
+.brand-mark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56rpx;
+  height: 56rpx;
+  border-radius: 18rpx;
+  flex-shrink: 0;
+  background: linear-gradient(150deg, #356442 0%, #173521 100%);
+  box-shadow: 0 8rpx 18rpx -10rpx rgba(24, 56, 36, 0.62), inset 0 1rpx 0 rgba(255, 255, 255, 0.18);
+}
+
+.brand-glyph {
+  font-family: var(--serif);
+  font-size: 29rpx;
+  line-height: 1;
+  color: #f1e5c6;
+}
+
+.brand-copy {
+  min-width: 0;
+}
+
+.brand-title {
+  font-size: 29rpx;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -0.4rpx;
+  color: var(--ink);
+}
+
+.brand-sub {
+  max-width: 330rpx;
+  font-size: 21rpx;
+  line-height: 1.4;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.head-side {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4rpx;
+  flex-shrink: 0;
+}
+
+.place-pill {
+  display: flex;
+  align-items: center;
+  gap: 6rpx;
+  height: 44rpx;
+  padding: 0 14rpx;
+  border: 1rpx solid var(--line);
+  border-radius: 999rpx;
+  background: rgba(255, 253, 247, 0.68);
+}
+
+.place-pin {
+  width: 20rpx;
+  height: 20rpx;
+  flex-shrink: 0;
+}
+
+.place-name {
+  font-size: 21rpx;
+  font-weight: 600;
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+
+.place-caret {
+  margin-top: -4rpx;
+  font-size: 18rpx;
+  color: var(--muted);
+}
+
+.head-date {
+  font-size: 20rpx;
+  color: var(--muted);
+  letter-spacing: 0.3rpx;
+}
+
+/* ---------- 今日态势卡 ---------- */
+
+.today-card {
+  position: relative;
+  overflow: hidden;
+  padding: 20rpx 24rpx 14rpx;
+  border: 1rpx solid rgba(44, 86, 55, 0.14);
+  border-radius: 30rpx;
+  background: linear-gradient(135deg, #edf2e8 0%, #f7f2e3 100%);
+  box-shadow: 0 1rpx 2rpx rgba(22, 36, 27, 0.04), 0 18rpx 34rpx -24rpx rgba(22, 36, 27, 0.45);
+  animation: fade-up 0.4s cubic-bezier(0.22, 0.9, 0.3, 1) both;
+}
+
+/* 今日态势卡天气自适应 */
+.today-card.theme-dawn {
+  background: linear-gradient(135deg, #f0ebd9 0%, #e9e3ce 50%, #d8cfb3 100%);
+  border-color: rgba(142, 103, 51, 0.25);
+}
+.today-card.theme-sunny {
+  background: linear-gradient(135deg, #e3edf2 0%, #ebf1e8 50%, #f6f0dd 100%);
+  border-color: rgba(44, 86, 55, 0.18);
+}
+.today-card.theme-snow {
+  background: linear-gradient(135deg, #e4ecf3 0%, #dfe7ed 60%, #cbd6de 100%);
+  border-color: rgba(100, 130, 155, 0.35);
+}
+.today-card.theme-dusk {
+  background: linear-gradient(135deg, #faebd7 0%, #f0d8bd 55%, #dfc3a3 100%);
+  border-color: rgba(167, 93, 69, 0.25);
+}
+.today-card.theme-night {
+  background: linear-gradient(135deg, #2a3842 0%, #1c262d 100%);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+.today-card.theme-night .today-label,
+.today-card.theme-night .temp-num,
+.today-card.theme-night .temp-unit,
+.today-card.theme-night .temp-desc,
+.today-card.theme-night .temp-meta,
+.today-card.theme-night .hay-label,
+.today-card.theme-night .hay-num,
+.today-card.theme-night .hay-unit,
+.today-card.theme-night .today-foot text {
+  color: #f7eedb !important;
+}
+
+/* 极端气象动态提示条 */
+.extreme-alert-strip {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 10rpx;
+  margin-top: 10rpx;
+  padding: 8rpx 16rpx;
+  background: rgba(167, 93, 69, 0.12);
+  border: 1rpx solid rgba(167, 93, 69, 0.28);
+  border-radius: 12rpx;
+}
+.extreme-alert-strip .alert-icon {
+  font-size: 20rpx;
+}
+.extreme-alert-strip .alert-text {
+  font-size: 21rpx;
+  font-weight: 600;
+  color: var(--clay);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.today-topo {
+  position: absolute;
+  right: -34rpx;
+  bottom: -14rpx;
+  z-index: 0;
+  width: 420rpx;
+  height: 220rpx;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.today-glow {
+  position: absolute;
+  right: -50rpx;
+  top: -100rpx;
+  z-index: 0;
+  width: 300rpx;
+  height: 300rpx;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(201, 164, 106, 0.34) 0%, rgba(201, 164, 106, 0) 68%);
+}
+
+.today-top {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16rpx;
+}
+
+.today-label {
+  font-size: 21rpx;
+  font-weight: 600;
+  letter-spacing: 2rpx;
+  color: var(--pine-2);
+}
+
+.live-pill {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  padding: 2rpx 12rpx;
+  border: 1rpx solid rgba(44, 86, 55, 0.12);
+  border-radius: 999rpx;
+  background: rgba(255, 253, 247, 0.62);
+  font-size: 20rpx;
+  color: var(--ink-3);
+}
+
+.live-dot {
+  width: 8rpx;
+  height: 8rpx;
+  border-radius: 50%;
+  background: #4b8a5c;
+  box-shadow: 0 0 0 4rpx rgba(75, 138, 92, 0.16);
+  animation: live-pulse 2.4s ease-in-out infinite;
+}
+
+.live-dot.is-loading {
+  background: var(--brass-2);
+  box-shadow: 0 0 0 4rpx rgba(201, 164, 106, 0.18);
+}
+
+.live-dot.is-error {
+  background: var(--clay);
+  box-shadow: 0 0 0 4rpx rgba(167, 93, 69, 0.16);
+  animation: none;
+}
+
+.today-body {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20rpx;
+  padding: 10rpx 0 12rpx;
+}
+
+.today-weather {
+  flex: 1;
+  min-width: 0;
+}
+
+.temp-line {
+  display: flex;
+  align-items: flex-start;
+  line-height: 1;
+}
+
+.temp-num {
+  font-size: 90rpx;
+  font-weight: 600;
+  line-height: 0.92;
+  letter-spacing: -5rpx;
+  color: var(--ink);
+}
+
+.temp-num.is-empty {
+  font-weight: 400;
+  letter-spacing: 0;
+  color: var(--muted-2);
+}
+
+.temp-unit {
+  margin: 6rpx 0 0 4rpx;
+  font-family: var(--serif);
+  font-size: 34rpx;
+  color: var(--ink-2);
+}
+
+.temp-desc {
+  margin-top: 8rpx;
+  font-size: 27rpx;
+  font-weight: 600;
+  color: var(--ink-2);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.temp-meta {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  margin-top: 6rpx;
+  font-size: 21rpx;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.temp-meta-icon {
+  width: 22rpx;
+  height: 22rpx;
+  opacity: 0.85;
+  flex-shrink: 0;
+}
+
+.hay-block {
+  width: 232rpx;
+  flex-shrink: 0;
+  padding-left: 22rpx;
+  border-left: 1rpx solid rgba(44, 86, 55, 0.14);
+}
+
+.hay-label {
+  font-size: 21rpx;
+  color: var(--ink-3);
+}
+
+.hay-line {
+  display: flex;
+  align-items: baseline;
+  gap: 4rpx;
+  margin-top: 2rpx;
+}
+
+.hay-num {
+  font-size: 46rpx;
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -2rpx;
+  color: var(--pine-2);
+}
+
+.hay-unit {
+  font-size: 21rpx;
+  color: var(--muted);
+}
+
+.hay-track {
+  height: 6rpx;
+  margin-top: 10rpx;
+  border-radius: 3rpx;
+  background: rgba(44, 86, 55, 0.12);
+  overflow: hidden;
+}
+
+.hay-fill {
+  height: 100%;
+  border-radius: 3rpx;
+  background: linear-gradient(90deg, #6a9a74, #2c5637);
+  transition: width 0.5s ease;
+}
+
+.hay-fill.is-low {
+  background: linear-gradient(90deg, #c98f6f, #a75d45);
+}
+
+.hay-status {
+  margin-top: 8rpx;
+  font-size: 21rpx;
+  font-weight: 600;
+  color: var(--pine-2);
+  white-space: nowrap;
+}
+
+.hay-status.is-low {
+  color: #8f4a34;
+}
+
+.today-foot {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16rpx;
+  padding-top: 10rpx;
+  border-top: 1rpx solid rgba(44, 86, 55, 0.12);
+  font-size: 20rpx;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.today-go {
+  flex-shrink: 0;
+  font-weight: 600;
+  color: var(--pine-2);
+}
+
+/* ---------- 牧区动态简讯播报条 ---------- */
+
+.live-bulletin {
+  display: flex;
+  align-items: center;
+  gap: 14rpx;
+  height: 62rpx;
+  padding: 0 18rpx;
+  border-radius: 18rpx;
+  background: var(--card);
+  border: 1rpx solid var(--line);
+  box-shadow: var(--shadow-1);
+}
+
+.bulletin-icon-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36rpx;
+  height: 36rpx;
+  border-radius: 50%;
+  background: var(--pine-wash);
+  flex-shrink: 0;
+}
+
+.bulletin-icon {
+  width: 22rpx;
+  height: 22rpx;
+}
+
+.bulletin-pulse {
+  position: absolute;
+  inset: -4rpx;
+  border-radius: 50%;
+  border: 2rpx solid var(--pine);
+  opacity: 0.35;
+  animation: radar-pulse 2.4s infinite ease-out;
+}
+
+@keyframes radar-pulse {
+  0% { transform: scale(0.9); opacity: 0.6; }
+  100% { transform: scale(1.4); opacity: 0; }
+}
+
+.bulletin-swiper {
+  flex: 1;
+  height: 62rpx;
+}
+
+.bulletin-item {
+  display: flex;
+  align-items: center;
+  height: 62rpx;
+}
+
+.bulletin-content {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  width: 100%;
+}
+
+.bulletin-tag {
+  flex-shrink: 0;
+  padding: 2rpx 10rpx;
+  border-radius: 6rpx;
+  font-size: 18rpx;
+  font-weight: 700;
+  background: var(--pine-wash);
+  color: var(--pine);
+  border: 1rpx solid rgba(44, 86, 55, 0.15);
+}
+
+.bulletin-text {
+  font-size: 22rpx;
+  color: var(--ink-2);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ---------- 高原画卷轮播展台 ---------- */
+
+.swiper-wrap {
+  position: relative;
+  width: 100%;
+}
+
+.pasture-swiper {
+  width: 100%;
+  height: 250rpx;
+  border-radius: 28rpx;
+  overflow: hidden;
+  box-shadow: 0 2rpx 4rpx rgba(22, 36, 27, 0.04), 0 16rpx 32rpx -18rpx rgba(22, 36, 27, 0.4);
+}
+
+.pasture-slide {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 28rpx;
+  overflow: hidden;
+}
+
+.slide-image {
+  width: 100%;
+  height: 100%;
+}
+
+.slide-shade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(16, 28, 20, 0.08) 0%, rgba(16, 28, 20, 0.25) 45%, rgba(16, 28, 20, 0.8) 100%);
+}
+
+.slide-tag {
+  position: absolute;
+  top: 16rpx;
+  left: 18rpx;
+  padding: 4rpx 14rpx;
+  font-size: 19rpx;
+  font-weight: 700;
+  color: #fff;
+  border-radius: 999rpx;
+  background: rgba(35, 72, 45, 0.85);
+  border: 1rpx solid rgba(255, 255, 255, 0.3);
+  letter-spacing: 1.5rpx;
+}
+
+.slide-copy {
+  position: absolute;
+  left: 20rpx;
+  right: 20rpx;
+  bottom: 18rpx;
+}
+
+.slide-title {
+  font-size: 29rpx;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.35;
+  text-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.5);
+}
+
+.slide-sub {
+  margin-top: 4rpx;
+  font-size: 21rpx;
+  color: #f2e7cc;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-shadow: 0 1rpx 4rpx rgba(0, 0, 0, 0.5);
+}
+
+.slide-press {
+  opacity: 0.92;
+  transform: scale(0.99);
+}
+
+/* ---------- 四件家常事 ---------- */
+
+.quick-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12rpx;
+}
+
+button.quick-card {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  width: 100%;
+  min-height: 96rpx;
+  padding: 14rpx 16rpx;
+  border: 1rpx solid var(--line);
+  border-radius: 22rpx;
+  background: var(--card);
+  box-shadow: 0 1rpx 2rpx rgba(22, 36, 27, 0.03), 0 10rpx 22rpx -20rpx rgba(22, 36, 27, 0.35);
+  text-align: left;
+  animation: fade-up 0.42s cubic-bezier(0.22, 0.9, 0.3, 1) both;
+}
+
+.quick-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52rpx;
+  height: 52rpx;
+  border-radius: 16rpx;
+  flex-shrink: 0;
+  background: var(--sky-wash);
+}
+
+.quick-icon image {
+  width: 32rpx;
+  height: 32rpx;
+}
+
+.tone-brass .quick-icon {
+  background: var(--brass-wash);
+}
+
+.tone-pine .quick-icon {
+  background: var(--pine-wash);
+}
+
+.tone-clay .quick-icon {
+  background: var(--clay-wash);
+}
+
+.quick-copy {
+  flex: 1;
+  min-width: 0;
+}
+
+.quick-title {
+  font-size: 27rpx;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--ink);
+}
+
+.quick-desc {
+  font-size: 21rpx;
+  line-height: 1.4;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.quick-arrow {
+  margin-left: -4rpx;
+  flex-shrink: 0;
+  font-size: 26rpx;
+  line-height: 1;
+  color: var(--muted-2);
+}
+
+/* ---------- 今日牧活 ---------- */
+
+.todo-panel {
+  padding: 16rpx 18rpx 14rpx;
+  border: 1rpx solid var(--line);
+  border-radius: 26rpx;
+  background: var(--card);
+  box-shadow: var(--shadow-1);
+  animation: fade-up 0.46s cubic-bezier(0.22, 0.9, 0.3, 1) both;
+}
+
+.todo-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12rpx;
+}
+
+.todo-head-left {
+  display: flex;
+  align-items: baseline;
+  gap: 10rpx;
+}
+
+.todo-title {
+  font-size: 28rpx;
+  font-weight: 700;
+  letter-spacing: -0.3rpx;
+  color: var(--ink);
+}
+
+.todo-fraction {
+  font-family: var(--serif);
+  font-size: 20rpx;
+  color: var(--muted);
+}
+
+button.todo-add {
+  padding: 6rpx 16rpx;
+  border: 1rpx solid rgba(44, 86, 55, 0.2);
+  border-radius: 999rpx;
+  background: var(--pine-wash);
+  color: var(--pine-2);
+  font-size: 21rpx;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.todo-track {
+  height: 4rpx;
+  margin: 10rpx 0 8rpx;
+  border-radius: 2rpx;
+  background: var(--paper-2);
+  overflow: hidden;
+}
+
+.todo-fill {
+  height: 100%;
+  border-radius: 2rpx;
+  background: linear-gradient(90deg, #7da287, #2c5637);
+  transition: width 0.4s ease;
+}
+
+.todo-fill.is-done {
+  background: linear-gradient(90deg, #c9a46a, #a97f45);
+}
+
+.todo-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6rpx;
+}
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  min-height: 64rpx;
+  padding: 8rpx 10rpx;
+  border-radius: 14rpx;
+  transition: background 0.16s ease;
+}
+
+.todo-item.is-done {
+  background: var(--card-2);
+}
+
+.todo-check {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42rpx;
+  height: 42rpx;
+  border: 2rpx solid #96a993;
+  border-radius: 50%;
+  background: var(--card);
+  flex-shrink: 0;
+  transition: background 0.18s ease, border-color 0.18s ease;
+}
+
+.todo-check.checked {
+  border-color: #20452c;
+  background: linear-gradient(140deg, #3a6b49, #20452c);
+  box-shadow: 0 4rpx 10rpx -4rpx rgba(32, 69, 44, 0.5);
+}
+
+.todo-check-icon {
+  width: 26rpx;
+  height: 26rpx;
+}
+
+.todo-text {
+  flex: 1;
+  min-width: 0;
+  font-size: 27rpx;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--ink-2);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.todo-item.is-done .todo-text {
+  color: var(--muted-2);
+  text-decoration: line-through;
+}
+
+.todo-chip {
+  flex-shrink: 0;
+  padding: 4rpx 12rpx;
+  border: 1rpx solid var(--line);
+  border-radius: 999rpx;
+  background: var(--paper-2);
+  color: var(--ink-3);
+  font-size: 20rpx;
+  font-weight: 600;
+}
+
+/* ---------- 今日提醒 ---------- */
+
+.day-tip {
+  display: flex;
+  align-items: baseline;
+  gap: 12rpx;
+  padding: 0 6rpx 0 14rpx;
+  border-left: 3rpx solid var(--brass-2);
+  animation: fade-up 0.48s cubic-bezier(0.22, 0.9, 0.3, 1) both;
+}
+
+.day-tip-label {
+  flex-shrink: 0;
+  font-size: 19rpx;
+  font-weight: 700;
+  letter-spacing: 2rpx;
+  color: var(--brass);
+}
+
+.day-tip-text {
+  flex: 1;
+  min-width: 0;
+  font-size: 22rpx;
+  line-height: 1.65;
+  color: var(--muted);
+}
+
+/* ---------- 牧小安 ---------- */
+
+button.companion {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  width: 100%;
+  min-height: 92rpx;
+  padding: 12rpx 18rpx;
+  border: 1rpx solid rgba(201, 164, 106, 0.28);
+  border-radius: 24rpx;
+  background: linear-gradient(120deg, #2b5536 0%, #1a3924 100%);
+  box-shadow: 0 14rpx 26rpx -16rpx rgba(20, 45, 28, 0.7), inset 0 1rpx 0 rgba(255, 255, 255, 0.1);
+  text-align: left;
+  animation: fade-up 0.5s cubic-bezier(0.22, 0.9, 0.3, 1) both;
+}
+
+.companion-avatar-wrap {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.companion-avatar {
+  width: 62rpx;
+  height: 62rpx;
+  border-radius: 50%;
+  border: 2rpx solid rgba(241, 229, 198, 0.85);
+}
+
+.companion-online {
+  position: absolute;
+  right: -2rpx;
+  bottom: -2rpx;
+  width: 14rpx;
+  height: 14rpx;
+  border-radius: 50%;
+  background: #7fc08c;
+  border: 3rpx solid #22492e;
+}
+
+.companion-copy {
+  flex: 1;
+  min-width: 0;
+}
+
+.companion-name-row {
+  display: flex;
+  align-items: center;
+  gap: 10rpx;
+}
+
+.companion-name {
+  font-size: 26rpx;
+  font-weight: 700;
+  letter-spacing: 0.4rpx;
+  color: #fffdf2;
+}
+
+.companion-role {
+  padding: 0 10rpx;
+  border: 1rpx solid rgba(255, 255, 255, 0.22);
+  border-radius: 999rpx;
+  font-size: 19rpx;
+  color: #c9dcc4;
+}
+
+.companion-quote {
+  display: block;
+  margin-top: 2rpx;
+  font-size: 21rpx;
+  color: #c8d9c3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.companion-cta {
+  flex-shrink: 0;
+  padding: 8rpx 18rpx;
+  border-radius: 999rpx;
+  background: #f5efdc;
+  color: #23482d;
+  font-size: 21rpx;
+  font-weight: 700;
+}
+
+/* ---------- 记一笔弹层 ---------- */
+
+.sheet-sub {
+  margin-top: 4rpx;
+  font-size: 22rpx;
+  color: var(--muted);
+}
+
+.quick-tags-label {
+  margin: 20rpx 0 12rpx;
+  font-size: 22rpx;
+  color: var(--muted);
+  letter-spacing: 1rpx;
+}
+
+.quick-tags-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10rpx;
+  margin-bottom: 22rpx;
+}
+
+button.quick-tag-chip {
+  padding: 10rpx 20rpx;
+  border: 1rpx solid var(--line-2);
+  border-radius: 999rpx;
+  background: var(--card-2);
+  color: var(--ink-3);
+  font-size: 23rpx;
+  font-weight: 500;
+}
+
+button.quick-tag-chip.tag-selected {
+  border-color: var(--pine);
+  background: var(--pine);
+  color: #fffdf3;
+  font-weight: 600;
+}
+
+.todo-sheet-input {
+  height: 96rpx;
+  padding: 0 22rpx;
+  border: 1rpx solid var(--line-2);
+  border-radius: var(--r-sm);
+  background: var(--card-2);
+  font-size: 27rpx;
+  color: var(--ink);
+}
+
+button.todo-sheet-confirm {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 100rpx;
+  margin-top: 20rpx;
+  border-radius: var(--r-md);
+  background: linear-gradient(140deg, #38694a, #1b3a25);
+  color: #fffdf3;
+  font-size: 29rpx;
+  font-weight: 600;
+  box-shadow: 0 16rpx 30rpx -14rpx rgba(24, 56, 36, 0.58);
+}
+
+/* 小屏（如 iPhone SE / 老款安卓）紧凑模式，保证一屏全览 */
+@media (max-height: 600px) {
+  .home {
+    gap: 10rpx;
+    padding-top: 14rpx;
+  }
+
+  .home-head {
+    min-height: 58rpx;
+  }
+
+  .brand-mark {
+    width: 50rpx;
+    height: 50rpx;
+    border-radius: 16rpx;
+  }
+
+  .brand-glyph {
+    font-size: 26rpx;
+  }
+
+  .brand-title {
+    font-size: 27rpx;
+  }
+
+  .brand-sub {
+    font-size: 18rpx;
+  }
+
+  .place-pill {
+    height: 40rpx;
+  }
+
+  .today-card {
+    padding: 16rpx 22rpx 12rpx;
+  }
+
+  .temp-num {
+    font-size: 78rpx;
+  }
+
+  .temp-desc {
+    font-size: 25rpx;
+  }
+
+  .today-body {
+    padding: 6rpx 0 8rpx;
+  }
+
+  .hay-num {
+    font-size: 42rpx;
+  }
+
+  button.quick-card {
+    min-height: 88rpx;
+    padding: 10rpx 14rpx;
+  }
+
+  .quick-icon {
+    width: 46rpx;
+    height: 46rpx;
+  }
+
+  .quick-icon image {
+    width: 28rpx;
+    height: 28rpx;
+  }
+
+  .todo-panel {
+    padding: 14rpx 16rpx 12rpx;
+  }
+
+  .todo-item {
+    min-height: 54rpx;
+    padding: 6rpx 8rpx;
+  }
+
+  .todo-track {
+    margin: 8rpx 0 6rpx;
+  }
+
+  button.companion {
+    min-height: 84rpx;
+    padding: 10rpx 16rpx;
+  }
+
+  .companion-avatar {
+    width: 56rpx;
+    height: 56rpx;
+  }
+
+  .day-tip {
+    display: none;
+  }
+}
+
+

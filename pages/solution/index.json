@@ -1,0 +1,8 @@
+{
+  "usingComponents": {},
+  "navigationBarBackgroundColor": "#FFFFFF",
+  "navigationBarTextStyle": "black",
+  "navigationBarTitleText": "融天 · 牧情看板",
+  "enablePullDownRefresh": true,
+  "backgroundColor": "#F4F6F9"
+}

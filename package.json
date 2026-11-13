@@ -1,0 +1,15 @@
+{
+  "name": "rongtian-herdsman-miniprogram",
+  "version": "1.0.0",
+  "description": "融天牧伴：面向牧民的天气、备草、养护与求助小程序",
+  "scripts": {
+    "test": "node --test tests/*.test.cjs"
+  },
+  "author": "",
+  "license": "",
+  "dependencies": {
+    "@cloudbase/wx-cloud-client-sdk": "^1.2.1",
+    "dayjs": "^1.9.3",
+    "tdesign-miniprogram": "^1.6.0"
+  }
+}

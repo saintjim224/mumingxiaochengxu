@@ -1,0 +1,309 @@
+/* 我家牛羊 */
+
+.farm-cover {
+  position: relative;
+  height: 272rpx;
+  margin-bottom: 20rpx;
+  border-radius: 30rpx;
+  overflow: hidden;
+  box-shadow: 0 2rpx 4rpx rgba(22, 36, 27, 0.04), 0 24rpx 44rpx -26rpx rgba(22, 36, 27, 0.5);
+}
+
+.farm-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.farm-shade {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(180deg, rgba(10, 26, 16, 0.06) 0%, rgba(10, 26, 16, 0.1) 42%, rgba(10, 26, 16, 0.72) 100%);
+}
+
+.farm-cover-tag {
+  position: absolute;
+  right: 22rpx;
+  top: 20rpx;
+  padding: 4rpx 16rpx;
+  border: 1rpx solid rgba(255, 253, 247, 0.3);
+  border-radius: 999rpx;
+  background: rgba(12, 28, 18, 0.24);
+  font-size: 18rpx;
+  letter-spacing: 1.6rpx;
+  color: #f3ead6;
+}
+
+.cover-action-pill {
+  position: absolute;
+  left: 22rpx;
+  top: 20rpx;
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  padding: 6rpx 18rpx;
+  border-radius: 999rpx;
+  background: rgba(18, 38, 24, 0.65);
+  border: 1rpx solid rgba(255, 255, 255, 0.28);
+  color: #fff;
+  font-size: 20rpx;
+  font-weight: 500;
+  z-index: 2;
+}
+
+.farm-cover-stats {
+  position: absolute;
+  right: 22rpx;
+  bottom: 22rpx;
+  padding: 6rpx 18rpx;
+  border-radius: 999rpx;
+  background: rgba(35, 72, 45, 0.85);
+  border: 1rpx solid rgba(255, 255, 255, 0.2);
+  color: #f7eedb;
+  font-size: 21rpx;
+  font-weight: 600;
+  letter-spacing: 0.5rpx;
+}
+
+.farm-cover-copy {
+  position: absolute;
+  left: 26rpx;
+  bottom: 22rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.farm-cover-label {
+  font-size: 19rpx;
+  letter-spacing: 3rpx;
+  color: rgba(255, 253, 247, 0.78);
+}
+
+.farm-cover-name {
+  margin-top: 4rpx;
+  font-size: 38rpx;
+  font-weight: 700;
+  letter-spacing: -0.6rpx;
+  color: #fffdf2;
+  text-shadow: 0 2rpx 12rpx rgba(10, 24, 14, 0.35);
+}
+
+/* ---------- 数量 ---------- */
+
+.counts-card {
+  display: flex;
+  align-items: center;
+  gap: 22rpx;
+  padding: 24rpx 26rpx;
+}
+
+.count-block {
+  display: flex;
+  flex-direction: column;
+  min-width: 110rpx;
+}
+
+.count-value {
+  font-size: 62rpx;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -3rpx;
+  color: var(--ink);
+}
+
+.count-label {
+  margin-top: 6rpx;
+  font-size: 21rpx;
+  letter-spacing: 0.5rpx;
+  color: var(--muted);
+}
+
+.count-divider {
+  width: 1rpx;
+  height: 64rpx;
+  background: var(--line);
+}
+
+button.counts-edit {
+  margin-left: auto;
+  flex-shrink: 0;
+  padding: 0 8rpx;
+  min-height: 88rpx;
+  font-size: 23rpx;
+  color: var(--pine);
+}
+
+.empty-art {
+  width: 148rpx;
+  height: 132rpx;
+  margin-bottom: 18rpx;
+  opacity: 0.9;
+}
+
+.empty-state .primary-button {
+  width: 100%;
+}
+
+/* ---------- 干草 ---------- */
+
+.hay-summary {
+  display: flex;
+  align-items: center;
+  gap: 18rpx;
+}
+
+.hay-icon-tile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 82rpx;
+  height: 82rpx;
+  border-radius: 22rpx;
+  flex-shrink: 0;
+  background: var(--brass-wash);
+}
+
+.hay-icon-tile image {
+  width: 46rpx;
+  height: 46rpx;
+}
+
+.hay-copy {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.hay-line {
+  display: flex;
+  align-items: baseline;
+  gap: 6rpx;
+}
+
+.hay-value {
+  font-size: 46rpx;
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -2rpx;
+  color: var(--ink);
+}
+
+.hay-unit {
+  font-size: 22rpx;
+  color: var(--muted);
+}
+
+.hay-note {
+  margin-top: 4rpx;
+  font-size: 22rpx;
+  color: var(--ink-3);
+}
+
+.feed-button {
+  margin-top: 18rpx;
+}
+
+/* ---------- 常用联系人入口 ---------- */
+
+button.help-link {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  width: 100%;
+  margin-top: 20rpx;
+  padding: 22rpx 24rpx;
+  border: 1rpx solid var(--line);
+  border-radius: 24rpx;
+  background: var(--card);
+  box-shadow: var(--shadow-1);
+  text-align: left;
+}
+
+.help-icon-tile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 72rpx;
+  height: 72rpx;
+  border-radius: 20rpx;
+  flex-shrink: 0;
+  background: var(--clay-wash);
+}
+
+.help-icon-tile image {
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.help-copy {
+  flex: 1;
+  min-width: 0;
+}
+
+.help-title {
+  font-size: 28rpx;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.help-desc {
+  margin-top: 2rpx;
+  font-size: 22rpx;
+  color: var(--muted);
+}
+
+.help-arrow {
+  flex-shrink: 0;
+  font-size: 30rpx;
+  line-height: 1;
+  color: var(--muted-2);
+}
+
+/* ---------- 编辑 ---------- */
+
+.farm-form {
+  margin-top: 20rpx;
+}
+
+.form-title-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16rpx;
+  margin-bottom: 8rpx;
+}
+
+.form-caption {
+  font-size: 21rpx;
+  color: var(--muted);
+}
+
+.farm-picker {
+  display: flex;
+  align-items: center;
+  gap: 6rpx;
+  min-height: 76rpx;
+  font-size: 26rpx;
+  color: var(--pine-2);
+}
+
+.picker-caret {
+  font-size: 22rpx;
+  color: var(--muted);
+}
+
+.farm-input {
+  width: 230rpx;
+  text-align: right;
+  font-size: 34rpx;
+}
+
+.save-farm {
+  margin-top: 26rpx;
+}

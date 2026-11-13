@@ -1,0 +1,82 @@
+<view class="page-shell">
+  <view class="eyebrow">遇到难处，身边有人</view>
+  <view class="page-title">找人帮个忙</view>
+  <view class="page-intro">把熟悉的电话记下来，要用时一点就找到。</view>
+
+  <view class="contact-card" wx:for="{{contacts}}" wx:key="id">
+    <view class="contact-head">
+      <view class="contact-icon-tile tone-{{item.tone}}">
+        <image src="/images/icons/{{item.icon}}.svg" mode="aspectFit" />
+      </view>
+      <view class="contact-head-copy">
+        <view class="contact-title">{{item.name}}</view>
+        <view class="contact-desc">{{item.description}}</view>
+      </view>
+      <view class="contact-state {{item.contact ? 'is-saved' : ''}}">{{item.contact ? '已记录' : '未填写'}}</view>
+    </view>
+
+    <block wx:if="{{item.contact}}">
+      <view class="contact-person">
+        <view class="person-avatar">{{item.initial}}</view>
+        <view class="person-copy">
+          <text class="person-name">{{item.contact.name}}</text>
+          <text class="person-phone">{{item.contact.phone}}</text>
+        </view>
+        <button class="person-edit" data-id="{{item.id}}" bindtap="edit" hover-class="chip-press">改号码</button>
+      </view>
+      <button class="primary-button call-btn" data-id="{{item.id}}" bindtap="call" hover-class="pressed">拨打电话</button>
+    </block>
+    <button wx:else class="ghost-button add-contact" data-id="{{item.id}}" bindtap="edit" hover-class="pressed">＋ 记一个联系电话</button>
+  </view>
+
+  <view class="emergency-card">
+    <view class="emergency-head">
+      <view class="emergency-head-copy">
+        <view class="section-title">人员遇险，紧急求助</view>
+        <view class="emergency-sub">说清你在哪里、发生了什么、有没有人受伤。</view>
+      </view>
+      <image class="emergency-icon" src="/images/icons/line-shield.svg" mode="aspectFit" />
+    </view>
+    <view class="emergency-row">
+      <button class="emergency-btn" data-phone="110" bindtap="emergency" hover-class="pressed">
+        <text class="emergency-num num">110</text>
+        <text class="emergency-label">报警求助</text>
+      </button>
+      <button class="emergency-btn" data-phone="119" bindtap="emergency" hover-class="pressed">
+        <text class="emergency-num num">119</text>
+        <text class="emergency-label">消防救援</text>
+      </button>
+      <button class="emergency-btn" data-phone="120" bindtap="emergency" hover-class="pressed">
+        <text class="emergency-num num">120</text>
+        <text class="emergency-label">人员急救</text>
+      </button>
+    </view>
+  </view>
+
+  <view class="bottom-note">这里不会自动派出救援，请拨通电话说明情况</view>
+</view>
+
+<block wx:if="{{editor}}">
+  <view class="sheet-mask" bindtap="close" catchtouchmove="noOp"></view>
+  <view class="sheet contact-sheet">
+    <view class="sheet-grabber"></view>
+    <view class="sheet-heading">
+      <view>
+        <view class="sheet-title">{{editor.name}} · 记个电话</view>
+        <view class="sheet-sub">只保存在这台手机上</view>
+      </view>
+      <button class="sheet-close" bindtap="close">关闭</button>
+    </view>
+    <view class="editor-field">
+      <text class="editor-label">怎么称呼</text>
+      <input class="field-input full" value="{{name}}" maxlength="20" placeholder="{{editor.placeholder}}" placeholder-class="ph" bindinput="onName" adjust-position="{{true}}" />
+    </view>
+    <view class="editor-field">
+      <text class="editor-label">联系电话</text>
+      <input class="field-input full" value="{{phone}}" maxlength="16" type="text" placeholder="手机号，或带区号的座机" placeholder-class="ph" bindinput="onPhone" adjust-position="{{true}}" />
+    </view>
+    <view class="field-hint">请填写你认识、确认可以联系的人。</view>
+    <view class="form-error" wx:if="{{error}}">{{error}}</view>
+    <button class="primary-button save-contact" bindtap="save" hover-class="pressed">保存这个电话</button>
+  </view>
+</block>

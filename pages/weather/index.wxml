@@ -1,0 +1,123 @@
+<view class="page-shell">
+  <view class="eyebrow">出门前，先看一眼</view>
+  <view class="page-title">我这里的天气</view>
+  <view class="page-intro">县城附近作参考，草场的风雪还要看眼前。</view>
+
+  <picker range="{{counties}}" range-key="name" value="{{countyIndex}}" bindchange="onCountyChange">
+    <view class="place-bar" aria-role="button" aria-label="切换地区">
+      <view class="place-tile">
+        <image src="/images/icons/line-pin.svg" mode="aspectFit" />
+      </view>
+      <view class="place-copy">
+        <text class="place-label">当前地区</text>
+        <text class="place-name">{{county.name}}</text>
+      </view>
+      <view class="place-switch">切换 ⌄</view>
+    </view>
+  </picker>
+
+  <view class="weather-hero {{weatherTheme}}">
+    <image class="hero-topo" src="/images/ui/topo-lines.svg" mode="widthFix" />
+    <view class="hero-glow"></view>
+
+    <view class="hero-top">
+      <text class="hero-label">实时观测</text>
+      <view class="live-pill">
+        <view class="live-dot {{loading ? 'is-loading' : ''}}"></view>
+        <text>{{loading ? '获取中' : weather && weather.stale ? '数据稍早' : '刚刚更新'}}</text>
+      </view>
+    </view>
+
+    <block wx:if="{{weather}}">
+      <view class="hero-main">
+        <view class="hero-temp">
+          <text class="hero-num num">{{weather.temperature}}</text>
+          <text class="hero-deg">°C</text>
+        </view>
+        <view class="hero-icon-wrap">
+          <image class="hero-icon" src="/images/icons/line-weather.svg" mode="aspectFit" />
+        </view>
+      </view>
+      <view class="hero-desc">{{weather.description}}</view>
+
+      <view class="hero-stats">
+        <view class="hero-stat">
+          <image class="hero-stat-icon" src="/images/icons/line-wind.svg" mode="aspectFit" />
+          <view class="hero-stat-copy">
+            <text class="stat-label">风速</text>
+            <text class="stat-value">{{weather.wind}}</text>
+          </view>
+        </view>
+        <view class="hero-stat">
+          <image class="hero-stat-icon" src="/images/icons/line-drop.svg" mode="aspectFit" />
+          <view class="hero-stat-copy">
+            <text class="stat-label">本时段降水</text>
+            <text class="stat-value">{{weather.precipitation}}</text>
+          </view>
+        </view>
+      </view>
+
+      <view class="hero-foot">
+        <text>更新 {{weather.clock || weather.time}}</text>
+        <text>{{weather.source}}</text>
+      </view>
+    </block>
+
+    <block wx:else>
+      <view class="hero-loading" wx:if="{{loading}}">
+        <view class="skeleton sk-temp"></view>
+        <view class="skeleton sk-line"></view>
+        <view class="skeleton sk-line short"></view>
+        <text class="hero-wait">正在看看当地天气…</text>
+      </view>
+      <view class="hero-empty" wx:else>
+        <image class="hero-empty-icon" src="/images/icons/line-alert.svg" mode="aspectFit" />
+        <view class="hero-empty-title">天气还没连上</view>
+        <view class="hero-empty-text">{{error || '稍后再试一次'}}</view>
+      </view>
+    </block>
+
+    <button class="hero-refresh" bindtap="refresh" loading="{{loading}}" disabled="{{loading}}" hover-class="pressed">
+      {{loading ? '正在获取天气' : '重新获取天气'}}
+    </button>
+  </view>
+
+  <view class="notice">
+    <image class="notice-icon" src="/images/icons/line-alert.svg" mode="aspectFit" />
+    <view class="notice-copy">{{weather && weather.stale ? '这份天气已经较早，请更新后再参考。' : '草场和县城的天气可能不同。出不出牧，还要看看当地预警、路况和眼前的风雪。'}}</view>
+  </view>
+
+  <view class="section-heading">
+    <text class="section-title">出牧前的三个习惯</text>
+    <text class="section-caption">看一眼，稳当些</text>
+  </view>
+
+  <view class="habit-card">
+    <view class="habit" wx:for="{{habits}}" wx:key="title">
+      <text class="habit-index">0{{index + 1}}</text>
+      <view class="habit-copy">
+        <view class="habit-title">{{item.title}}</view>
+        <view class="habit-text">{{item.text}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="section-heading">
+    <text class="section-title">草场卫星遥感监测</text>
+    <text class="section-caption">太空看草场 · 绿度与长势</text>
+  </view>
+
+  <view class="rs-card" bindtap="previewRemoteSensing" hover-class="card-press" aria-role="button" aria-label="查看卫星遥感大图">
+    <image class="rs-image" src="/images/dynamic/banner_remote_sensing.jpg" mode="aspectFill" />
+    <view class="rs-shade"></view>
+    <view class="rs-badge">卫星植被监测</view>
+    <view class="rs-copy">
+      <view class="rs-title">高寒草场越冬长势感知</view>
+      <view class="rs-desc">近期牧区植被盖度与蓄墒态势平稳，未见大范围退化，适宜稳健放牧与科学补饲。</view>
+    </view>
+    <text class="rs-zoom-tip">点此查看大图 ⤢</text>
+  </view>
+
+  <button class="secondary-button guide-button" bindtap="openGuide" hover-class="pressed">下雪降温，怎么护牛羊 →</button>
+  <view class="bottom-note">天气来自公开气象服务 · 一切以当地预警和现场判断为准</view>
+</view>

@@ -1,0 +1,129 @@
+<view class="page-shell">
+  <view class="eyebrow">家有余粮，心里不慌</view>
+  <view class="page-title">草料还够吃几天？</view>
+  <view class="page-intro">填上自家的数量，帮你算一笔明白账。</view>
+
+  <view class="feed-hero-banner">
+    <image class="feed-hero-img" src="/images/dynamic/banner_hay_storage.jpg" mode="aspectFill" />
+    <view class="feed-hero-shade"></view>
+    <view class="feed-hero-tag">冬春储备示范</view>
+    <view class="feed-hero-copy">
+      <view class="feed-hero-title">科学算料 · 预防断草</view>
+      <view class="feed-hero-desc">按牛羊头数精准测算，提前储备越冬更踏实</view>
+    </view>
+  </view>
+
+  <view class="form-card">
+    <view class="form-card-head">
+      <text class="form-card-title">家里的牛羊</text>
+      <text class="form-card-hint">没有就填 0</text>
+    </view>
+
+    <view class="qty-row">
+      <view class="qty-copy">
+        <view class="qty-label">牦牛</view>
+        <view class="qty-hint">按头计算</view>
+      </view>
+      <view class="stepper">
+        <button class="step-btn" data-field="yaks" data-delta="-1" bindtap="adjust" hover-class="pressed" aria-label="牦牛减一头">−</button>
+        <input class="step-input num" aria-label="牦牛头数" type="number" maxlength="6" value="{{form.yaks}}" placeholder="0" placeholder-class="ph" data-field="yaks" bindinput="onInput" />
+        <button class="step-btn" data-field="yaks" data-delta="1" bindtap="adjust" hover-class="pressed" aria-label="牦牛加一头">＋</button>
+        <text class="step-unit">头</text>
+      </view>
+    </view>
+
+    <view class="qty-row">
+      <view class="qty-copy">
+        <view class="qty-label">绵羊</view>
+        <view class="qty-hint">按只计算</view>
+      </view>
+      <view class="stepper">
+        <button class="step-btn" data-field="sheep" data-delta="-1" bindtap="adjust" hover-class="pressed" aria-label="绵羊减一只">−</button>
+        <input class="step-input num" aria-label="绵羊只数" type="number" maxlength="6" value="{{form.sheep}}" placeholder="0" placeholder-class="ph" data-field="sheep" bindinput="onInput" />
+        <button class="step-btn" data-field="sheep" data-delta="1" bindtap="adjust" hover-class="pressed" aria-label="绵羊加一只">＋</button>
+        <text class="step-unit">只</text>
+      </view>
+    </view>
+
+    <view class="qty-row last">
+      <view class="qty-copy">
+        <view class="qty-label">家里还有干草</view>
+        <view class="qty-hint">1 吨 = 1000 公斤</view>
+      </view>
+      <view class="storage-input">
+        <input class="storage-input-field num" aria-label="现有干草吨数" type="digit" maxlength="9" value="{{form.hay}}" placeholder="填吨数" placeholder-class="ph" data-field="hay" bindinput="onInput" />
+        <text class="storage-unit">吨</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="section-heading">
+    <text class="section-title">这次想备多少天？</text>
+    <text class="section-caption">按最近天气选</text>
+  </view>
+  <view class="choice-row">
+    <button wx:for="{{daysOptions}}" wx:key="*this" class="choice {{form.days == item ? 'selected' : ''}}" data-days="{{item}}" bindtap="chooseDays" hover-class="chip-press">{{item}} 天</button>
+  </view>
+
+  <button class="rate-toggle" bindtap="toggleRates" hover-class="chip-press" aria-label="修改每日用草量">
+    <text class="rate-copy">每头牛 {{form.yakRate}} 公斤 · 每只羊 {{form.sheepRate}} 公斤 / 天</text>
+    <text class="rate-action">{{ratesOpen ? '收起 −' : '修改 ＋'}}</text>
+  </button>
+
+  <view class="rate-card" wx:if="{{ratesOpen}}">
+    <view class="muted rate-note">可按当地农技员建议，调整每日干草用量。</view>
+    <view class="form-row">
+      <text class="form-label">每头牛 / 公斤</text>
+      <input class="field-input rate-input" type="digit" maxlength="5" value="{{form.yakRate}}" placeholder-class="ph" data-field="yakRate" bindinput="onInput" />
+    </view>
+    <view class="form-row">
+      <text class="form-label">每只羊 / 公斤</text>
+      <input class="field-input rate-input" type="digit" maxlength="5" value="{{form.sheepRate}}" placeholder-class="ph" data-field="sheepRate" bindinput="onInput" />
+    </view>
+  </view>
+
+  <view class="form-error" wx:if="{{error}}">{{error}}</view>
+
+  <button class="primary-button calc-button" bindtap="calculate" hover-class="pressed">帮我算一算</button>
+
+  <view id="feed-result" class="result-card {{result.enough ? 'is-enough' : 'is-short'}}" wx:if="{{result}}">
+    <view class="result-head">
+      <view class="result-head-copy">
+        <text class="result-eyebrow">估算结果</text>
+        <view class="result-big">
+          <text class="result-num num">{{result.daysLeft}}</text>
+          <text class="result-unit">天</text>
+        </view>
+        <view class="result-caption">现有干草大约还能吃</view>
+      </view>
+      <view class="result-badge {{result.enough ? 'ok' : 'warn'}}">{{result.enough ? '备草够用' : '需要补草'}}</view>
+    </view>
+
+    <view class="result-gauge">
+      <view class="result-gauge-fill" style="width: {{result.percent}}%"></view>
+    </view>
+
+    <view class="result-rows">
+      <view class="result-row">
+        <text>{{result.days}} 天共需干草</text>
+        <text class="result-value">{{result.total}} 吨</text>
+      </view>
+      <view class="result-row">
+        <text>每天大约用草</text>
+        <text class="result-value">{{result.dailyKg}} 公斤</text>
+      </view>
+      <view class="result-row" wx:if="{{!result.enough}}">
+        <text>还差多少</text>
+        <text class="result-value is-warn">{{result.shortage}} 吨</text>
+      </view>
+    </view>
+
+    <view class="result-summary">{{result.enough ? '按当前用量，备草够这段时间使用。' : '还需补上 ' + result.shortage + ' 吨干草，提前准备更安心。'}}</view>
+
+    <button class="primary-button" bindtap="save" disabled="{{saved}}" hover-class="pressed">{{saved ? '已记好，下次不用重填' : '记到我家牛羊'}}</button>
+    <button class="text-button" wx:if="{{!result.enough}}" bindtap="getHelp">找人问问草料 →</button>
+  </view>
+
+  <view class="field-hint calc-note">这是干草用量估算，不含精料和损耗。幼畜、孕畜与不同体况用量不同，请按当地农技员建议调整。</view>
+</view>
+

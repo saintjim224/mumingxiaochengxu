@@ -1,0 +1,20 @@
+# 依赖与构建产物（npm install 后由开发者工具「构建 npm」重新生成）
+node_modules/
+miniprogram_npm/
+
+# 微信开发者工具的本机私有配置
+project.private.config.json
+
+# 系统与编辑器
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+*.log
+npm-debug.log*
+yarn-error.log*
+
+# 本地临时备份
+*-备份*/
+backup/

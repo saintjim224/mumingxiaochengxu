@@ -1,0 +1,235 @@
+/* 找人帮忙 */
+
+.contact-card {
+  padding: 26rpx;
+  margin-bottom: 18rpx;
+  border: 1rpx solid var(--line);
+  border-radius: var(--r-lg);
+  background: var(--card);
+  box-shadow: var(--shadow-1);
+}
+
+.contact-head {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+
+.contact-icon-tile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 76rpx;
+  height: 76rpx;
+  border-radius: 20rpx;
+  flex-shrink: 0;
+}
+
+.contact-icon-tile image {
+  width: 42rpx;
+  height: 42rpx;
+}
+
+.tone-pine {
+  background: var(--pine-wash);
+}
+
+.tone-clay {
+  background: var(--clay-wash);
+}
+
+.tone-brass {
+  background: var(--brass-wash);
+}
+
+.contact-head-copy {
+  flex: 1;
+  min-width: 0;
+}
+
+.contact-title {
+  font-size: 32rpx;
+  font-weight: 700;
+  letter-spacing: -0.2rpx;
+  color: var(--ink);
+}
+
+.contact-desc {
+  margin-top: 2rpx;
+  font-size: 23rpx;
+  color: var(--muted);
+}
+
+.contact-state {
+  flex-shrink: 0;
+  padding: 4rpx 12rpx;
+  border: 1rpx dashed var(--line-2);
+  border-radius: 999rpx;
+  font-size: 19rpx;
+  color: var(--muted);
+}
+
+.contact-state.is-saved {
+  border-style: solid;
+  border-color: rgba(44, 86, 55, 0.2);
+  background: var(--pine-wash);
+  color: var(--pine-2);
+}
+
+.contact-person {
+  display: flex;
+  align-items: center;
+  gap: 14rpx;
+  margin-top: 20rpx;
+  padding-top: 20rpx;
+  border-top: 1rpx solid var(--line);
+}
+
+.person-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: linear-gradient(140deg, #e4ecdd, #cbdcc4);
+  color: var(--pine-2);
+  font-size: 26rpx;
+  font-weight: 700;
+}
+
+.person-copy {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.person-name {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.person-phone {
+  font-family: var(--serif);
+  font-size: 25rpx;
+  letter-spacing: 1rpx;
+  color: var(--ink-3);
+}
+
+.person-edit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  min-height: 80rpx;
+  padding: 0 12rpx;
+  font-size: 22rpx;
+  color: var(--muted);
+}
+
+.call-btn {
+  margin-top: 18rpx;
+  min-height: 92rpx;
+}
+
+.add-contact {
+  margin-top: 20rpx;
+}
+
+/* ---------- 紧急求助 ---------- */
+
+.emergency-card {
+  margin-top: 26rpx;
+  padding: 28rpx;
+  border: 1rpx solid rgba(167, 93, 69, 0.18);
+  border-radius: var(--r-lg);
+  background: linear-gradient(150deg, #f8ece4 0%, #faf4e9 100%);
+}
+
+.emergency-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18rpx;
+}
+
+.emergency-head-copy {
+  flex: 1;
+  min-width: 0;
+}
+
+.emergency-sub {
+  margin-top: 6rpx;
+  font-size: 24rpx;
+  line-height: 1.6;
+  color: #7d5a48;
+}
+
+.emergency-icon {
+  width: 48rpx;
+  height: 48rpx;
+  flex-shrink: 0;
+  opacity: 0.85;
+}
+
+.emergency-row {
+  display: flex;
+  gap: 12rpx;
+  margin-top: 22rpx;
+}
+
+button.emergency-btn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rpx;
+  min-height: 124rpx;
+  padding: 16rpx 8rpx;
+  border: 1rpx solid rgba(167, 93, 69, 0.2);
+  border-radius: 20rpx;
+  background: rgba(255, 253, 247, 0.72);
+  text-align: center;
+}
+
+.emergency-num {
+  font-size: 44rpx;
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -1rpx;
+  color: #8f4a34;
+}
+
+.emergency-label {
+  font-size: 21rpx;
+  color: #7d5a48;
+}
+
+/* ---------- 记电话弹层 ---------- */
+
+.sheet-sub {
+  margin-top: 4rpx;
+  font-size: 22rpx;
+  color: var(--muted);
+}
+
+.editor-field {
+  margin-top: 20rpx;
+}
+
+.editor-label {
+  display: block;
+  margin-bottom: 2rpx;
+  font-size: 24rpx;
+  font-weight: 600;
+  color: var(--ink-3);
+}
+
+.save-contact {
+  margin-top: 26rpx;
+}
+

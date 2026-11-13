@@ -1,0 +1,59 @@
+<view class="page-shell">
+  <view class="assistant-card">
+    <view class="assistant-avatar-wrap">
+      <image class="assistant-avatar" src="/images/ui/mu-xiaoan-new.jpg" mode="aspectFill" />
+      <view class="assistant-online"></view>
+    </view>
+    <view class="assistant-copy">
+      <view class="assistant-kicker">牧场小帮手</view>
+      <view class="assistant-name">牧小安</view>
+      <view class="assistant-sub">天气、备草、牛羊防病，随时问</view>
+    </view>
+  </view>
+
+  <view class="assistant-quote">“拿不准的事，先问一句再动手。”</view>
+
+  <view class="section-heading">
+    <text class="section-title">常问的几件事</text>
+    <text class="section-caption">点一下直接去办</text>
+  </view>
+  <view class="question-list">
+    <button wx:for="{{questions}}" wx:key="text" class="question" data-index="{{index}}" bindtap="openQuestion" hover-class="chip-press">
+      <text class="question-text">{{item.text}}</text>
+      <text class="question-arrow">›</text>
+    </button>
+  </view>
+
+  <view class="section-heading">
+    <text class="section-title">直接问我</text>
+    <text class="section-caption">打字也可以</text>
+  </view>
+
+  <view class="conversation" wx:if="{{messages.length}}">
+    <view wx:for="{{messages}}" wx:key="id" class="message {{item.sender}}">
+      <view class="message-meta">{{item.sender === 'user' ? '你' : '牧小安'}}</view>
+      <view class="message-bubble">
+        <text selectable class="message-text">{{item.text}}</text>
+      </view>
+      <view class="message-source" wx:if="{{item.source}}">{{item.source}}</view>
+    </view>
+  </view>
+
+  <view class="thinking" wx:if="{{busy}}">
+    <view class="thinking-dot"></view>
+    <text>牧小安正在帮你看看…</text>
+  </view>
+
+  <view class="notice ask-error" wx:if="{{error}}">
+    <image class="notice-icon" src="/images/icons/line-alert.svg" mode="aspectFit" />
+    <view class="notice-copy">{{error}}</view>
+  </view>
+
+  <view id="ask-compose" class="composer">
+    <view class="composer-label">想问什么</view>
+    <textarea class="composer-input" aria-label="想问牧小安的问题" maxlength="500" value="{{input}}" bindinput="onInput" placeholder="例如：下雪前，圈舍要检查哪些地方？" placeholder-class="ph" auto-height="{{true}}" adjust-position="{{true}}" show-confirm-bar="{{false}}" />
+    <button class="primary-button composer-btn" bindtap="send" disabled="{{busy || !input}}" loading="{{busy}}" hover-class="pressed">{{busy ? '正在问牧小安' : error ? '重新发送' : '问问牧小安 →'}}</button>
+  </view>
+
+  <view class="bottom-note">回答供参考；紧急情况请直接联系当地人员</view>
+</view>

@@ -1,0 +1,184 @@
+<view class="home">
+  <!-- 顶部：品牌问候 / 地区 / 日期 -->
+  <view class="home-head">
+    <view class="brand">
+      <view class="brand-mark"><text class="brand-glyph">牧</text></view>
+      <view class="brand-copy">
+        <view class="brand-title">扎西德勒，牧友</view>
+        <view class="brand-sub">{{greeting}}</view>
+      </view>
+    </view>
+    <view class="head-side">
+      <picker range="{{counties}}" range-key="name" value="{{countyIndex}}" bindchange="onCountyChange">
+        <view class="place-pill" aria-role="button" aria-label="选择所在地区">
+          <image class="place-pin" src="/images/icons/line-pin.svg" mode="aspectFit" />
+          <text class="place-name">{{county.name}}</text>
+          <text class="place-caret">⌄</text>
+        </view>
+      </picker>
+      <text class="head-date">{{date}}</text>
+    </view>
+  </view>
+
+  <!-- 今日态势：天气 + 存草一屏读懂 -->
+  <view class="today-card {{weatherTheme}}" data-page="weather" bindtap="openPage" hover-class="card-press" aria-role="button" aria-label="查看今日天气">
+    <image class="today-topo" src="/images/ui/topo-lines.svg" mode="widthFix" />
+    <view class="today-glow"></view>
+
+    <view class="today-top">
+      <text class="today-label">今日天气</text>
+      <view class="live-pill">
+        <view class="live-dot {{loading ? 'is-loading' : ''}} {{weatherError ? 'is-error' : ''}}"></view>
+        <text>{{loading ? '更新中' : weatherError ? '暂未连上' : weather && weather.stale ? '数据稍早' : '实时'}}</text>
+      </view>
+    </view>
+
+    <view class="extreme-alert-strip" wx:if="{{isExtremeWeather}}" data-page="detail" catchtap="openAlertGuide">
+      <text class="alert-icon">⚠️</text>
+      <text class="alert-text">寒潮降温预警：请检查圈舍门窗，做好幼畜防风保暖 ›</text>
+    </view>
+
+    <view class="today-body">
+      <view class="today-weather">
+        <view class="temp-line">
+          <text class="temp-num num {{weather ? '' : 'is-empty'}}">{{weather ? weather.temperature : '—'}}</text>
+          <text class="temp-unit" wx:if="{{weather}}">°</text>
+        </view>
+        <view class="temp-desc">{{loading ? '正在获取当地天气' : weather ? weather.description : weatherError || '天气还没更新'}}</view>
+        <view class="temp-meta">
+          <image class="temp-meta-icon" src="/images/icons/line-wind.svg" mode="aspectFit" />
+          <text>{{weather ? weather.wind : '风向风力'}}</text>
+        </view>
+      </view>
+
+      <view class="hay-block" data-page="{{hay.saved ? 'feed' : 'aboutUs'}}" catchtap="openPage" aria-role="button" aria-label="{{hay.saved ? '查看草料测算' : '去记下家里的干草'}}">
+        <text class="hay-label">家中干草</text>
+        <view class="hay-line">
+          <text class="hay-num num">{{hay.saved ? hay.tons : '—'}}</text>
+          <text class="hay-unit" wx:if="{{hay.saved}}">吨</text>
+        </view>
+        <view class="hay-track">
+          <view class="hay-fill {{hay.saved && !hay.enough ? 'is-low' : ''}}" style="width: {{hay.saved ? hay.percent : 0}}%"></view>
+        </view>
+        <view class="hay-status {{hay.saved && !hay.enough ? 'is-low' : ''}}">{{hay.label}}</view>
+      </view>
+    </view>
+
+    <view class="today-foot">
+      <text>{{weather ? (weather.clock ? '更新于 ' + weather.clock : weather.status) : '出门前看一眼，避风雪'}}</text>
+      <text class="today-go">天气详情 ›</text>
+    </view>
+  </view>
+
+  <!-- 牧区动态简讯播报条 -->
+  <view class="live-bulletin">
+    <view class="bulletin-icon-wrap">
+      <image class="bulletin-icon" src="/images/icons/line-alert.svg" mode="aspectFit" />
+      <view class="bulletin-pulse"></view>
+    </view>
+    <swiper class="bulletin-swiper" vertical autoplay circular interval="3800" duration="500">
+      <swiper-item wx:for="{{bulletins}}" wx:key="id" class="bulletin-item">
+        <view class="bulletin-content">
+          <text class="bulletin-tag">{{item.tag}}</text>
+          <text class="bulletin-text">{{item.text}}</text>
+        </view>
+      </swiper-item>
+    </swiper>
+  </view>
+
+  <!-- 高原画卷轮播展台 -->
+  <view class="swiper-wrap">
+    <swiper class="pasture-swiper" autoplay circular interval="4800" duration="600" indicator-dots indicator-color="rgba(255,255,255,0.4)" indicator-active-color="#f5ecc8">
+      <swiper-item wx:for="{{banners}}" wx:key="id" class="pasture-slide" data-page="{{item.page}}" data-guideid="{{item.guideId}}" bindtap="onBannerTap" hover-class="slide-press">
+        <image class="slide-image" src="{{item.image}}" mode="aspectFill" />
+        <view class="slide-shade"></view>
+        <view class="slide-tag">{{item.tag}}</view>
+        <view class="slide-copy">
+          <view class="slide-title">{{item.title}}</view>
+          <view class="slide-sub">{{item.sub}}</view>
+        </view>
+      </swiper-item>
+    </swiper>
+  </view>
+
+  <!-- 四件家常事 -->
+  <view class="quick-grid">
+    <button wx:for="{{actions}}" wx:key="page" class="quick-card tone-{{item.tone}}" data-page="{{item.page}}" bindtap="openPage" hover-class="card-press" aria-label="{{item.title}}">
+      <view class="quick-icon">
+        <image src="/images/icons/{{item.icon}}.svg" mode="aspectFit" />
+      </view>
+      <view class="quick-copy">
+        <view class="quick-title">{{item.title}}</view>
+        <view class="quick-desc">{{item.desc}}</view>
+      </view>
+      <text class="quick-arrow">›</text>
+    </button>
+  </view>
+
+  <!-- 今日牧活 -->
+  <view class="todo-panel">
+    <view class="todo-head">
+      <view class="todo-head-left">
+        <text class="todo-title">今日牧活</text>
+        <text class="todo-fraction">{{todoStats.completed}} / {{todoStats.total}}</text>
+      </view>
+      <button class="todo-add" bindtap="openAddTodoSheet" hover-class="chip-press">＋ 记一笔</button>
+    </view>
+    <view class="todo-track">
+      <view class="todo-fill {{todoStats.allDone ? 'is-done' : ''}}" style="width: {{todoPercent}}%"></view>
+    </view>
+    <view class="todo-list">
+      <view wx:for="{{todos}}" wx:key="id" class="todo-item {{item.done ? 'is-done' : ''}}" data-id="{{item.id}}" bindtap="onToggleTodo" hover-class="todo-pressed" aria-role="checkbox" aria-checked="{{item.done}}">
+        <view class="todo-check {{item.done ? 'checked' : ''}}">
+          <image wx:if="{{item.done}}" class="todo-check-icon" src="/images/icons/line-check.svg" mode="aspectFit" />
+        </view>
+        <text class="todo-text">{{item.text}}</text>
+        <view wx:if="{{item.guideId || item.page}}" class="todo-chip" data-id="{{item.guideId}}" data-page="{{item.page}}" catchtap="onTodoGuide" hover-class="chip-press">
+          <text>{{item.tag}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 牧小安 -->
+  <view class="day-tip">
+    <text class="day-tip-label">今日提醒</text>
+    <text class="day-tip-text">{{tip}}</text>
+  </view>
+
+  <button class="companion" bindtap="openAssistant" hover-class="card-press" aria-label="问问牧小安">
+    <view class="companion-avatar-wrap">
+      <image class="companion-avatar" src="/images/ui/mu-xiaoan-new.jpg" mode="aspectFill" />
+      <view class="companion-online"></view>
+    </view>
+    <view class="companion-copy">
+      <view class="companion-name-row">
+        <text class="companion-name">牧小安</text>
+        <text class="companion-role">牧场助手</text>
+      </view>
+      <text class="companion-quote">天气、备草、防病，拿不准就问我</text>
+    </view>
+    <view class="companion-cta">去问</view>
+  </button>
+</view>
+
+<!-- 记一笔 -->
+<block wx:if="{{showAddSheet}}">
+  <view class="sheet-mask" bindtap="closeAddTodoSheet" catchtouchmove="noOp"></view>
+  <view class="sheet todo-sheet">
+    <view class="sheet-grabber"></view>
+    <view class="sheet-heading">
+      <view>
+        <view class="sheet-title">记一笔今天的事</view>
+        <view class="sheet-sub">只记在这台手机上，明天重新开始</view>
+      </view>
+      <button class="sheet-close" bindtap="closeAddTodoSheet">关闭</button>
+    </view>
+    <view class="quick-tags-label">常用标签</view>
+    <view class="quick-tags-row">
+      <button wx:for="{{quickTags}}" wx:key="*this" class="quick-tag-chip {{newTodoTag === item ? 'tag-selected' : ''}}" data-tag="{{item}}" bindtap="onSelectTag">{{item}}</button>
+    </view>
+    <input class="todo-sheet-input" placeholder-class="ph" placeholder="写下要做的事，如：下午联系兽医打疫苗" value="{{newTodoText}}" bindinput="onTodoTextInput" maxlength="30" auto-focus="{{true}}" />
+    <button class="todo-sheet-confirm" bindtap="confirmAddTodo" hover-class="pressed">记好了，添到今日待办</button>
+  </view>
+</block>

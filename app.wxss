@@ -1,0 +1,664 @@
+/* ============================================================
+   融天牧伴 · 高原牧民端设计系统
+   基调：羊皮纸暖白 / 松针深绿 / 高原铜金
+   字重克制、留白充足、细线描边、轻阴影分层
+   ============================================================ */
+
+page {
+  --paper: #f4f2e9;
+  --paper-2: #edeadf;
+  --card: #fffdf7;
+  --card-2: #faf8f0;
+  --ink: #16241b;
+  --ink-2: #33443a;
+  --ink-3: #56655b;
+  --muted: #647064;
+  --muted-2: #818c81;
+  --line: rgba(22, 36, 27, 0.085);
+  --line-2: rgba(22, 36, 27, 0.15);
+  --pine: #2c5637;
+  --pine-2: #1e4029;
+  --pine-3: #41704d;
+  --pine-wash: #e9efe4;
+  --brass: #8e6733;
+  --brass-2: #c9a46a;
+  --brass-wash: #f4ecdb;
+  --clay: #a75d45;
+  --clay-wash: #f7e9e2;
+  --sky: #5c7c8e;
+  --sky-wash: #e9eff2;
+  --r-xl: 36rpx;
+  --r-lg: 28rpx;
+  --r-md: 22rpx;
+  --r-sm: 16rpx;
+  --shadow-1: 0 1rpx 2rpx rgba(22, 36, 27, 0.04), 0 12rpx 30rpx -20rpx rgba(22, 36, 27, 0.3);
+  --shadow-2: 0 2rpx 4rpx rgba(22, 36, 27, 0.04), 0 26rpx 50rpx -26rpx rgba(22, 36, 27, 0.42);
+  --serif: "Georgia", "Songti SC", "STSong", "Noto Serif CJK SC", serif;
+
+  background: var(--paper);
+  color: var(--ink);
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  font-size: 30rpx;
+  line-height: 1.66;
+  -webkit-font-smoothing: antialiased;
+}
+
+view,
+button,
+input,
+textarea,
+scroll-view,
+navigator,
+image,
+text {
+  box-sizing: border-box;
+}
+
+button {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  color: inherit;
+  background: transparent;
+  appearance: none;
+  -webkit-appearance: none;
+  text-align: left;
+  overflow: visible;
+}
+
+button[class] {
+  width: auto;
+  margin: 0;
+}
+
+button::after {
+  border: 0;
+}
+
+button[disabled] {
+  color: var(--muted-2);
+}
+
+image {
+  display: block;
+}
+
+/* ---------- 版式 ---------- */
+
+.page-shell {
+  padding: 36rpx 36rpx calc(56rpx + env(safe-area-inset-bottom));
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 14rpx;
+  color: var(--brass);
+  font-size: 21rpx;
+  font-weight: 600;
+  letter-spacing: 4rpx;
+  line-height: 1.4;
+}
+
+.eyebrow::before {
+  content: "";
+  width: 30rpx;
+  height: 1rpx;
+  background: currentColor;
+  opacity: 0.65;
+  flex-shrink: 0;
+}
+
+.page-title {
+  margin: 16rpx 0 12rpx;
+  font-size: 52rpx;
+  font-weight: 700;
+  letter-spacing: -1.6rpx;
+  line-height: 1.24;
+  color: var(--ink);
+}
+
+.page-intro {
+  margin-bottom: 34rpx;
+  font-size: 27rpx;
+  line-height: 1.72;
+  color: var(--ink-3);
+}
+
+.section-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 20rpx;
+  margin: 42rpx 0 20rpx;
+}
+
+.section-title {
+  font-size: 33rpx;
+  font-weight: 700;
+  letter-spacing: -0.4rpx;
+  color: var(--ink);
+}
+
+.section-caption {
+  font-size: 22rpx;
+  color: var(--muted);
+}
+
+.serif {
+  font-family: var(--serif);
+}
+
+.num {
+  font-family: var(--serif);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -2rpx;
+}
+
+.muted {
+  color: var(--ink-3);
+  font-size: 26rpx;
+}
+
+.small {
+  font-size: 23rpx;
+  color: var(--muted);
+}
+
+.tiny {
+  font-size: 21rpx;
+  color: var(--muted-2);
+  letter-spacing: 0.5rpx;
+}
+
+.hairline {
+  height: 1rpx;
+  background: var(--line);
+}
+
+/* ---------- 卡片 ---------- */
+
+.paper {
+  position: relative;
+  background: var(--card);
+  border: 1rpx solid var(--line);
+  border-radius: var(--r-lg);
+  padding: 30rpx;
+  box-shadow: var(--shadow-1);
+}
+
+.paper-quiet {
+  background: var(--card-2);
+  box-shadow: none;
+}
+
+/* ---------- 按钮 ---------- */
+
+button.primary-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 104rpx;
+  padding: 20rpx 30rpx;
+  border-radius: var(--r-md);
+  background: linear-gradient(140deg, #38694a 0%, #244a30 52%, #1b3a25 100%);
+  color: #fffdf3;
+  font-size: 31rpx;
+  font-weight: 600;
+  letter-spacing: 0.6rpx;
+  text-align: center;
+  box-shadow: 0 16rpx 30rpx -14rpx rgba(24, 56, 36, 0.58), inset 0 1rpx 0 rgba(255, 255, 255, 0.16);
+}
+
+button.secondary-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 100rpx;
+  padding: 18rpx 30rpx;
+  border-radius: var(--r-md);
+  background: rgba(255, 253, 247, 0.72);
+  border: 1rpx solid var(--line-2);
+  color: var(--pine-2);
+  font-size: 30rpx;
+  font-weight: 600;
+  text-align: center;
+}
+
+button.ghost-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10rpx;
+  width: 100%;
+  min-height: 88rpx;
+  padding: 14rpx 24rpx;
+  border-radius: var(--r-sm);
+  border: 1rpx dashed var(--line-2);
+  background: rgba(255, 253, 247, 0.4);
+  color: var(--ink-2);
+  font-size: 27rpx;
+  text-align: center;
+}
+
+button.text-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 88rpx;
+  padding: 12rpx 20rpx;
+  color: var(--pine);
+  font-size: 27rpx;
+  font-weight: 600;
+  letter-spacing: 0.4rpx;
+  text-align: center;
+}
+
+button.danger-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 100rpx;
+  padding: 18rpx 30rpx;
+  border-radius: var(--r-md);
+  background: linear-gradient(140deg, #b06a50 0%, #96503a 100%);
+  color: #fff8f2;
+  font-size: 30rpx;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* ---------- 通用小元素 ---------- */
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20rpx;
+}
+
+.arrow {
+  margin-left: auto;
+  flex-shrink: 0;
+  font-size: 30rpx;
+  color: var(--muted-2);
+  line-height: 1;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8rpx;
+  padding: 6rpx 16rpx;
+  border-radius: 999rpx;
+  border: 1rpx solid var(--line);
+  background: rgba(255, 253, 247, 0.72);
+  font-size: 21rpx;
+  font-weight: 600;
+  color: var(--ink-3);
+  line-height: 1.5;
+}
+
+.pill.is-good {
+  border-color: rgba(44, 86, 55, 0.22);
+  background: var(--pine-wash);
+  color: var(--pine-2);
+}
+
+.pill.is-warn {
+  border-color: rgba(167, 93, 69, 0.24);
+  background: var(--clay-wash);
+  color: #8f4a34;
+}
+
+.divider-text {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  color: var(--muted-2);
+  font-size: 21rpx;
+  letter-spacing: 2rpx;
+}
+
+.divider-text::before,
+.divider-text::after {
+  content: "";
+  flex: 1;
+  height: 1rpx;
+  background: var(--line);
+}
+
+/* ---------- 表单 ---------- */
+
+.form-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18rpx;
+  padding: 24rpx 0;
+  border-bottom: 1rpx solid var(--line);
+}
+
+.form-row:last-child {
+  border-bottom: 0;
+  padding-bottom: 4rpx;
+}
+
+.form-row:first-child {
+  padding-top: 4rpx;
+}
+
+.form-label {
+  font-size: 29rpx;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.4;
+}
+
+.field-input {
+  min-width: 0;
+  height: 92rpx;
+  padding: 0 22rpx;
+  border: 1rpx solid var(--line-2);
+  border-radius: var(--r-sm);
+  background: var(--card-2);
+  color: var(--ink);
+  font-size: 32rpx;
+}
+
+.field-input.full {
+  width: 100%;
+  margin-top: 12rpx;
+}
+
+.field-hint {
+  margin-top: 12rpx;
+  font-size: 23rpx;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+.ph {
+  color: #aab2a6;
+}
+
+.form-error {
+  margin: 20rpx 0 0;
+  padding: 16rpx 20rpx;
+  border-radius: var(--r-sm);
+  background: var(--clay-wash);
+  color: #8f4a34;
+  font-size: 25rpx;
+  line-height: 1.6;
+}
+
+/* ---------- 提示 ---------- */
+
+.notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 16rpx;
+  padding: 24rpx 26rpx;
+  border-radius: var(--r-md);
+  border: 1rpx solid rgba(169, 127, 69, 0.22);
+  background: var(--brass-wash);
+  color: #6d5326;
+  font-size: 26rpx;
+  line-height: 1.7;
+}
+
+.notice-icon {
+  width: 34rpx;
+  height: 34rpx;
+  margin-top: 4rpx;
+  flex-shrink: 0;
+}
+
+.notice-copy {
+  flex: 1;
+  min-width: 0;
+}
+
+/* ---------- 空状态 ---------- */
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 52rpx 30rpx;
+}
+
+.empty-art {
+  width: 132rpx;
+  height: 110rpx;
+  margin-bottom: 18rpx;
+  opacity: 0.85;
+}
+
+.empty-title {
+  font-size: 32rpx;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 8rpx;
+}
+
+.empty-state .primary-button {
+  margin-top: 28rpx;
+}
+
+/* ---------- 分段选择 ---------- */
+
+.choice-row {
+  display: flex;
+  gap: 8rpx;
+  padding: 8rpx;
+  border: 1rpx solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--paper-2);
+}
+
+.choice {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 84rpx;
+  padding: 8rpx 12rpx;
+  border: 0;
+  border-radius: var(--r-sm);
+  background: transparent;
+  color: var(--ink-3);
+  font-size: 28rpx;
+  font-weight: 500;
+  text-align: center;
+  transition: background 0.18s ease, color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.choice.selected {
+  background: var(--card);
+  color: var(--pine-2);
+  font-weight: 700;
+  box-shadow: 0 6rpx 18rpx -10rpx rgba(22, 36, 27, 0.45);
+}
+
+/* ---------- 底部说明 ---------- */
+
+.bottom-note {
+  margin-top: 36rpx;
+  padding: 0 16rpx;
+  text-align: center;
+  color: var(--muted-2);
+  font-size: 21rpx;
+  line-height: 1.75;
+  letter-spacing: 0.3rpx;
+}
+
+/* ---------- 弹层 ---------- */
+
+.sheet-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100;
+  background: rgba(14, 26, 18, 0.5);
+}
+
+.sheet {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 101;
+  max-height: 86vh;
+  padding: 18rpx 36rpx calc(44rpx + env(safe-area-inset-bottom));
+  border-radius: var(--r-xl) var(--r-xl) 0 0;
+  background: var(--card);
+  box-shadow: 0 -20rpx 60rpx rgba(10, 22, 14, 0.28);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  animation: sheet-up 0.26s cubic-bezier(0.22, 0.9, 0.3, 1);
+}
+
+.sheet-grabber {
+  width: 72rpx;
+  height: 6rpx;
+  margin: 0 auto 26rpx;
+  border-radius: 3rpx;
+  background: var(--line-2);
+}
+
+.sheet-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20rpx;
+  margin-bottom: 10rpx;
+}
+
+.sheet-title {
+  font-size: 36rpx;
+  font-weight: 700;
+  letter-spacing: -0.6rpx;
+}
+
+.sheet-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 88rpx;
+  min-height: 76rpx;
+  padding: 8rpx 16rpx;
+  color: var(--muted);
+  font-size: 25rpx;
+}
+
+/* ---------- 点击反馈 ---------- */
+
+.pressed {
+  opacity: 0.88;
+  transform: scale(0.988);
+}
+
+.card-press {
+  transform: scale(0.989);
+  opacity: 0.94;
+}
+
+.chip-press {
+  opacity: 0.7;
+}
+
+.todo-pressed {
+  background: #f2f5ec;
+}
+
+button.primary-button.pressed,
+button.secondary-button.pressed,
+button.ghost-button.pressed {
+  transform: scale(0.985);
+  opacity: 0.95;
+}
+
+/* ---------- 动效 ---------- */
+
+@keyframes sheet-up {
+  from {
+    transform: translateY(48rpx);
+    opacity: 0.4;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16rpx);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shimmer {
+  from {
+    background-position: -160% 0;
+  }
+  to {
+    background-position: 260% 0;
+  }
+}
+
+@keyframes live-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.45;
+    transform: scale(0.82);
+  }
+}
+
+.fade-up {
+  animation: fade-up 0.42s cubic-bezier(0.22, 0.9, 0.3, 1) both;
+}
+
+.skeleton {
+  border-radius: 10rpx;
+  background: linear-gradient(90deg, rgba(22, 36, 27, 0.06) 25%, rgba(22, 36, 27, 0.03) 37%, rgba(22, 36, 27, 0.06) 63%);
+  background-size: 220% 100%;
+  animation: shimmer 1.35s linear infinite;
+}
+
+/* 禁用态：不使用高饱和主色，避免误以为可点 */
+button.primary-button[disabled] {
+  background: #e7e5da;
+  color: #9aa39a;
+  box-shadow: none;
+}
+
+button.secondary-button[disabled] {
+  border-style: dashed;
+  color: var(--muted-2);
+  background: transparent;
+}
+
+button.ghost-button[disabled] {
+  color: var(--muted-2);
+}
+

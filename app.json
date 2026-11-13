@@ -1,0 +1,44 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/aboutUs/index",
+    "pages/weather/index",
+    "pages/feed/index",
+    "pages/detail/index",
+    "pages/help/index",
+    "pages/ask/index"
+  ],
+  "window": {
+    "backgroundColor": "#f4f2e9",
+    "backgroundColorTop": "#f4f2e9",
+    "backgroundColorBottom": "#f4f2e9",
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#f4f2e9",
+    "navigationBarTitleText": "融天牧伴",
+    "navigationBarTextStyle": "black"
+  },
+  "sitemapLocation": "sitemap.json",
+  "style": "v2",
+  "lazyCodeLoading": "requiredComponents",
+  "tabBar": {
+    "color": "#6b766b",
+    "selectedColor": "#23482d",
+    "backgroundColor": "#fbf9f1",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "今天",
+        "iconPath": "images/ui/tab-today.png",
+        "selectedIconPath": "images/ui/tab-today-active.png"
+      },
+      {
+        "pagePath": "pages/aboutUs/index",
+        "text": "我家牛羊",
+        "iconPath": "images/ui/tab-farm.png",
+        "selectedIconPath": "images/ui/tab-farm-active.png"
+      }
+    ]
+  }
+}
+

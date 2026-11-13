@@ -1,0 +1,132 @@
+{
+  "description": "项目配置文件，详见文档：https://developers.weixin.qq.com/miniprogram/dev/devtools/projectconfig.html",
+  "packOptions": {
+    "ignore": [
+      {
+        "type": "folder",
+        "value": "tests"
+      },
+      {
+        "type": "folder",
+        "value": "docs"
+      },
+      {
+        "type": "folder",
+        "value": "images/brand"
+      },
+      {
+        "type": "folder",
+        "value": "miniprogram_npm"
+      },
+      {
+        "type": "folder",
+        "value": "components"
+      },
+      {
+        "type": "folder",
+        "value": "pages/news"
+      },
+      {
+        "type": "folder",
+        "value": "pages/solution"
+      },
+      {
+        "type": "file",
+        "value": "images/banner_grazing.jpg"
+      },
+      {
+        "type": "file",
+        "value": "images/disaster_snow_defense.jpg"
+      },
+      {
+        "type": "file",
+        "value": "images/feed_storage_calc.jpg"
+      },
+      {
+        "type": "file",
+        "value": "images/remote_sensing_pasture.jpg"
+      },
+      {
+        "type": "file",
+        "value": "images/ui/avatar.jpg"
+      }
+    ],
+    "include": []
+  },
+  "setting": {
+    "urlCheck": false,
+    "es6": true,
+    "enhance": true,
+    "postcss": true,
+    "preloadBackgroundData": false,
+    "minified": true,
+    "newFeature": true,
+    "coverView": true,
+    "nodeModules": false,
+    "autoAudits": false,
+    "showShadowRootInWxmlPanel": true,
+    "scopeDataCheck": false,
+    "uglifyFileName": false,
+    "checkInvalidKey": true,
+    "checkSiteMap": true,
+    "uploadWithSourceMap": true,
+    "compileHotReLoad": false,
+    "useMultiFrameRuntime": true,
+    "useApiHook": true,
+    "useApiHostProcess": true,
+    "babelSetting": {
+      "ignore": [],
+      "disablePlugins": [],
+      "outputPath": ""
+    },
+    "enableEngineNative": false,
+    "useIsolateContext": true,
+    "useCompilerModule": true,
+    "userConfirmedUseCompilerModuleSwitch": false,
+    "userConfirmedBundleSwitch": false,
+    "packNpmManually": false,
+    "packNpmRelationList": [],
+    "minifyWXSS": true,
+    "localPlugins": false,
+    "condition": false,
+    "compileWorklet": false,
+    "disableUseStrict": false,
+    "minifyWXML": true,
+    "useCompilerPlugins": false
+  },
+  "appid": "wxfd9516e5c192a81f",
+  "projectname": "融天高原牧伴",
+  "libVersion": "3.7.3",
+  "cloudfunctionTemplateRoot": "cloudfunctionTemplate/",
+  "cloudfunctionRoot": "cloudfunctions/",
+  "condition": {
+    "miniprogram": {
+      "list": [
+        {
+          "name": "今天 · 牧场首页",
+          "pathName": "pages/index/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "我家牛羊",
+          "pathName": "pages/aboutUs/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "护牛羊",
+          "pathName": "pages/detail/index",
+          "query": "",
+          "scene": null
+        }
+      ]
+    }
+  },
+  "compileType": "miniprogram",
+  "editorSetting": {
+    "tabIndent": "insertSpaces",
+    "tabSize": 2
+  },
+  "simulatorPluginLibVersion": {}
+}

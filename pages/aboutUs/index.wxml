@@ -1,0 +1,110 @@
+<view class="page-shell">
+  <view class="eyebrow">自己的牧场，心里有本账</view>
+  <view class="page-title">我家牛羊</view>
+  <view class="page-intro">数量记在这里，下次算草料不用再填。</view>
+
+  <view class="farm-cover" wx:if="{{!editing}}">
+    <image class="farm-background" src="{{farmCover}}" mode="aspectFill" bindtap="previewCover" />
+    <view class="farm-shade"></view>
+    <view class="cover-action-pill" bindtap="chooseCover" hover-class="chip-press" aria-label="更换牧场照片">
+      <text class="cover-action-icon">📷</text>
+      <text class="cover-action-text">拍照/换图</text>
+    </view>
+    <view class="farm-cover-tag">高原牧场</view>
+    <view class="farm-cover-copy">
+      <text class="farm-cover-label">我家的牧场</text>
+      <text class="farm-cover-name">{{county.name}}</text>
+    </view>
+    <view class="farm-cover-stats" wx:if="{{farm.saved}}">
+      <text>{{farm.yaks}} 头牛 · {{farm.sheep}} 只羊</text>
+    </view>
+  </view>
+
+  <block wx:if="{{!editing}}">
+    <view class="paper counts-card" wx:if="{{farm.saved}}">
+      <view class="count-block">
+        <text class="count-value num">{{farm.yaks}}</text>
+        <text class="count-label">头牦牛</text>
+      </view>
+      <view class="count-divider"></view>
+      <view class="count-block">
+        <text class="count-value num">{{farm.sheep}}</text>
+        <text class="count-label">只绵羊</text>
+      </view>
+      <button class="text-button counts-edit" bindtap="startEdit" hover-class="chip-press">改一改 →</button>
+    </view>
+
+    <view class="paper empty-state" wx:else>
+      <image class="empty-art" src="/images/icons/line-yak.svg" mode="aspectFit" />
+      <view class="empty-title">把家里的牛羊记下来</view>
+      <view class="muted">不用注册，填一次就帮你记住。</view>
+      <button class="primary-button" bindtap="startEdit" hover-class="pressed">记下我家牛羊</button>
+    </view>
+
+    <view class="section-heading">
+      <text class="section-title">家里的干草</text>
+      <text class="section-caption">自己填，自己心里有数</text>
+    </view>
+
+    <view class="paper hay-summary">
+      <view class="hay-icon-tile">
+        <image src="/images/icons/line-hay.svg" mode="aspectFit" />
+      </view>
+      <view class="hay-copy">
+        <view class="hay-line">
+          <text class="hay-value num">{{farm.saved ? farm.hay : '—'}}</text>
+          <text class="hay-unit" wx:if="{{farm.saved}}">吨</text>
+        </view>
+        <text class="hay-note">{{summary ? '按已设用量，约够 ' + summary.daysLeft + ' 天' : '记好数量，就能算还够吃几天'}}</text>
+      </view>
+    </view>
+
+    <button class="secondary-button feed-button" bindtap="openFeed" hover-class="pressed">去算一算草料 →</button>
+
+    <button class="help-link" bindtap="openHelp" hover-class="card-press">
+      <view class="help-icon-tile">
+        <image src="/images/icons/line-phone.svg" mode="aspectFit" />
+      </view>
+      <view class="help-copy">
+        <view class="help-title">我常联系的人</view>
+        <view class="help-desc">兽医、村干部、送草料的人</view>
+      </view>
+      <text class="help-arrow">›</text>
+    </button>
+  </block>
+
+  <view class="paper farm-form" wx:else>
+    <view class="form-title-row">
+      <text class="section-title">填上我家的数量</text>
+      <text class="form-caption">没有的填 0</text>
+    </view>
+
+    <view class="form-row">
+      <text class="form-label">所在地区</text>
+      <picker range="{{counties}}" range-key="name" value="{{form.countyIndex}}" bindchange="onCountyChange">
+        <view class="farm-picker">{{counties[form.countyIndex].name}} <text class="picker-caret">⌄</text></view>
+      </picker>
+    </view>
+    <view class="form-row">
+      <text class="form-label">牦牛 / 头</text>
+      <input aria-label="牦牛头数" class="field-input farm-input num" type="number" maxlength="6" value="{{form.yaks}}" placeholder="如 80" placeholder-class="ph" data-field="yaks" bindinput="onInput" />
+    </view>
+    <view class="form-row">
+      <text class="form-label">绵羊 / 只</text>
+      <input aria-label="绵羊只数" class="field-input farm-input num" type="number" maxlength="6" value="{{form.sheep}}" placeholder="如 200" placeholder-class="ph" data-field="sheep" bindinput="onInput" />
+    </view>
+    <view class="form-row">
+      <text class="form-label">干草 / 吨</text>
+      <input aria-label="干草吨数" class="field-input farm-input num" type="digit" maxlength="9" value="{{form.hay}}" placeholder="如 12" placeholder-class="ph" data-field="hay" bindinput="onInput" />
+    </view>
+
+    <view class="form-error" wx:if="{{error}}">{{error}}</view>
+    <button class="primary-button save-farm" bindtap="save" hover-class="pressed">记好了，保存</button>
+    <button class="text-button" bindtap="cancelEdit">先不改了</button>
+  </view>
+
+  <view class="bottom-note">
+    <view>数量和常用电话保存在这台手机上</view>
+    <view>更换手机或清除小程序数据后需要重新填写</view>
+  </view>
+</view>

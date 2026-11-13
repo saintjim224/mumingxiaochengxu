@@ -1,0 +1,127 @@
+<view class="container">
+  <view class="main-content">
+    <!-- 顶部大字看板卡片 -->
+    <view class="hero-board-card">
+      <view class="board-top">
+        <picker range="{{counties}}" range-key="name" value="{{selectedCountyIndex}}" bindchange="onCountyChange">
+          <view class="county-badge">
+            <text class="pin">📍</text>
+            <text class="c-name">{{currentCounty.name}}</text>
+            <text class="arrow">▼</text>
+          </view>
+        </picker>
+        <text class="alt-text">海拔 {{currentCounty.altitude}}</text>
+      </view>
+
+      <view class="board-middle">
+        <view class="big-temp-col">
+          <text class="big-temp">{{currentCounty.temp}}°</text>
+          <text class="temp-sub">体感 {{currentCounty.feelTemp}}℃ · {{currentCounty.weather}}</text>
+        </view>
+        <view class="big-status-col">
+          <text class="status-badge {{currentCounty.riskLevel}}">{{grazingAdvice.status}}</text>
+          <text class="wind-sub">{{currentCounty.wind}}</text>
+        </view>
+      </view>
+
+      <!-- 预警提示条 -->
+      <view class="alert-bar-box {{currentCounty.riskLevel}}" bindtap="goDetail" data-id="snow_defense">
+        <text class="ab-icon">⚠️</text>
+        <text class="ab-txt">{{currentCounty.riskTitle}}：{{currentCounty.riskDesc}}</text>
+        <text class="ab-arrow">›</text>
+      </view>
+    </view>
+
+    <!-- 放牧决策关键卡 -->
+    <view class="card-box">
+      <view class="card-head">
+        <view class="card-title-text">
+          <text class="card-title-icon">🧭</text>
+          <text>放牧安全窗口与转场指引</text>
+        </view>
+      </view>
+
+      <view class="advice-block-list">
+        <view class="abl-item">
+          <text class="abl-tag">建议放牧窗口</text>
+          <text class="abl-val text-blue">{{grazingAdvice.timeSlot}}</text>
+        </view>
+        <view class="abl-item">
+          <text class="abl-tag">放牧安全半径</text>
+          <text class="abl-val">{{grazingAdvice.radius}}</text>
+        </view>
+        <view class="abl-item">
+          <text class="abl-tag">圈舍保暖指导</text>
+          <text class="abl-val">{{grazingAdvice.warmShed}}</text>
+        </view>
+        <view class="abl-item">
+          <text class="abl-tag">应急补饲建议</text>
+          <text class="abl-val">{{grazingAdvice.feedAction}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 4 格高寒草场监测指标 -->
+    <view class="card-box">
+      <view class="card-head">
+        <view class="card-title-text">
+          <text class="card-title-icon">📊</text>
+          <text>高寒草场关键监测指标</text>
+        </view>
+        <text class="card-extra-action">实况核验</text>
+      </view>
+
+      <view class="indicator-2x2">
+        <view class="ind-cell" wx:for="{{indicators}}" wx:key="name">
+          <text class="ind-name">{{item.name}}</text>
+          <text class="ind-val {{item.warn ? 'text-red' : 'text-blue'}}">{{item.val}}</text>
+          <text class="ind-sub">{{item.status}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 规程入口列表 -->
+    <view class="card-box">
+      <view class="card-head">
+        <view class="card-title-text">
+          <text class="card-title-icon">📖</text>
+          <text>牧户实用防灾保畜规程</text>
+        </view>
+      </view>
+
+      <view class="guide-link-item" bindtap="goDetail" data-id="snow_defense">
+        <view class="gli-left">
+          <text class="gli-title">暴雪白灾自救保畜规程 (GB/T 20482)</text>
+          <text class="gli-sub">积雪超15cm全面舍饲，牛羊弱幼畜保温</text>
+        </view>
+        <text class="gli-arrow">查看 ›</text>
+      </view>
+
+      <view class="guide-link-item" bindtap="goDetail" data-id="shed_guard" style="margin-top: 14rpx;">
+        <view class="gli-left">
+          <text class="gli-title">塑料暖棚抗雪防风加固技术图解</text>
+          <text class="gli-sub">压膜线张紧、软布顺坡推雪与立木支撑</text>
+        </view>
+        <text class="gli-arrow">查看 ›</text>
+      </view>
+
+      <view class="guide-link-item" bindtap="goDetail" data-id="feed_storage" style="margin-top: 14rpx;">
+        <view class="gli-left">
+          <text class="gli-title">高寒牧区 14 天越冬草料储备国家标准</text>
+          <text class="gli-sub">单畜日补干草精料定额与应急调拨</text>
+        </view>
+        <text class="gli-arrow">查看 ›</text>
+      </view>
+    </view>
+
+    <!-- 一键应急直拨 -->
+    <view class="call-action-card" bindtap="callRescue">
+      <text class="cac-icon">📞</text>
+      <view class="cac-text">
+        <text class="cac-t">暴风雪受困？一键联系乡镇应急调度站</text>
+        <text class="cac-sub">那曲 / 玛多 24 小时应急草料与救援值班</text>
+      </view>
+      <text class="cac-btn">拨打</text>
+    </view>
+  </view>
+</view>

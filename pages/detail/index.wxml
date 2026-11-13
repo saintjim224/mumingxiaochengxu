@@ -1,0 +1,54 @@
+<view class="page-shell">
+  <view class="eyebrow">不讲大道理，告诉你怎么做</view>
+  <view class="page-title">照顾好家里的牛羊</view>
+  <view class="page-intro">下雪、降温、备草，照着做就稳当。</view>
+
+  <view class="choice-row guide-tabs">
+    <button wx:for="{{tabs}}" wx:key="id" class="choice {{activeId === item.id ? 'selected' : ''}}" data-id="{{item.id}}" bindtap="changeGuide" hover-class="chip-press">{{item.name}}</button>
+  </view>
+
+  <view class="guide-banner" wx:if="{{article.image}}">
+    <image class="guide-banner-img" src="{{article.image}}" mode="aspectFill" />
+    <view class="guide-banner-shade"></view>
+    <view class="guide-banner-badge">{{activeId === 'feed_storage' ? '越冬储备' : '防灾保幼'}}</view>
+    <view class="guide-banner-copy">
+      <view class="guide-banner-kicker">科学牧养 · 实景规程</view>
+      <view class="guide-banner-title">{{article.title}}</view>
+    </view>
+  </view>
+
+  <view class="guide-intro">
+    <view class="guide-icon-tile">
+      <image src="/images/icons/line-{{article.icon}}.svg" mode="aspectFit" />
+    </view>
+    <view class="guide-intro-copy">
+      <view class="guide-kicker">牧活要点</view>
+      <view class="guide-title">{{article.title}}</view>
+      <view class="guide-subtitle">{{article.subtitle}}</view>
+    </view>
+  </view>
+
+  <view class="guide-steps">
+    <view class="guide-step" wx:for="{{article.steps}}" wx:key="title">
+      <view class="guide-step-rail">
+        <text class="guide-number">0{{index + 1}}</text>
+        <view class="guide-line" wx:if="{{index < article.steps.length - 1}}"></view>
+      </view>
+      <view class="guide-step-copy">
+        <view class="guide-step-title">{{item.title}}</view>
+        <view class="guide-step-text">{{item.text}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="notice guide-notice">
+    <image class="notice-icon" src="/images/icons/line-alert.svg" mode="aspectFit" />
+    <view class="notice-copy">{{article.note}}</view>
+  </view>
+
+  <button wx:if="{{activeId === 'feed_storage'}}" class="primary-button" bindtap="openFeed" hover-class="pressed">按我家的数量算一算 →</button>
+  <button wx:else class="primary-button" bindtap="openHelp" hover-class="pressed">自己拿不准，找人帮忙 →</button>
+
+  <view class="bottom-note">日常养护参考 · 具体处置听当地兽医和应急人员指导</view>
+</view>
+

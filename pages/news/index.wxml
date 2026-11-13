@@ -1,0 +1,58 @@
+<view class="chat-container">
+  <!-- 顶部首席官切换 -->
+  <view class="officer-tabs">
+    <view class="tab-item {{selectedOfficer === 'mu-xiaoan' ? 'active' : ''}}" bindtap="selectOfficer" data-id="mu-xiaoan">
+      <image class="tab-avatar" src="/images/brand/mu-xiaoan.jpg"></image>
+      <text class="tab-name">牧小安 (防灾)</text>
+    </view>
+    <view class="tab-item {{selectedOfficer === 'mu-xiaorong' ? 'active' : ''}}" bindtap="selectOfficer" data-id="mu-xiaorong">
+      <image class="tab-avatar" src="/images/brand/mu-xiaorong.jpg"></image>
+      <text class="tab-name">牧小融 (气象)</text>
+    </view>
+    <view class="tab-item {{selectedOfficer === 'mu-xiaoxiang' ? 'active' : ''}}" bindtap="selectOfficer" data-id="mu-xiaoxiang">
+      <image class="tab-avatar" src="/images/brand/mu-xiaoxiang.jpg"></image>
+      <text class="tab-name">牧小象 (遥感)</text>
+    </view>
+  </view>
+
+  <!-- 快捷提问气泡横滑 -->
+  <view class="quick-bar">
+    <text class="quick-title">高频防灾问答：</text>
+    <scroll-view class="quick-scroll" scroll-x enable-flex>
+      <view class="quick-chip" wx:for="{{quickQuestions}}" wx:key="*this" bindtap="askQuick" data-q="{{item}}">
+        {{item}}
+      </view>
+    </scroll-view>
+  </view>
+
+  <!-- 对话气泡区域 -->
+  <scroll-view class="msg-scroll" scroll-y scroll-into-view="msg-bottom">
+    <view class="msg-list">
+      <block wx:for="{{messages}}" wx:key="id">
+        <!-- AI 消息 -->
+        <view class="msg-row ai" wx:if="{{item.sender === 'ai'}}">
+          <image class="msg-avatar" src="{{item.avatar}}"></image>
+          <view class="msg-bubble-box">
+            <text class="msg-sender-name">{{item.name}} · 首席官</text>
+            <view class="msg-bubble ai-bubble">{{item.text}}</view>
+          </view>
+        </view>
+
+        <!-- 牧民提问 -->
+        <view class="msg-row user" wx:if="{{item.sender === 'user'}}">
+          <view class="msg-bubble-box user-box">
+            <view class="msg-bubble user-bubble">{{item.text}}</view>
+          </view>
+          <view class="user-avatar">牧</view>
+        </view>
+      </block>
+      <view id="msg-bottom" style="height: 20rpx;"></view>
+    </view>
+  </scroll-view>
+
+  <!-- 底部输入栏 -->
+  <view class="input-bar">
+    <input class="chat-input" placeholder="输入你想咨询的高原天候或防灾问题..." value="{{inputText}}" bindinput="onInput" confirm-type="send" bindconfirm="sendInput" />
+    <view class="send-btn" bindtap="sendInput">发送</view>
+  </view>
+</view>

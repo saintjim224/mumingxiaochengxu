@@ -1,0 +1,229 @@
+/* pages/solution/index.wxss - 微信原生浅色标准规范 */
+
+.container {
+  padding-bottom: 60rpx;
+}
+
+.tip-bar {
+  display: flex;
+  align-items: center;
+  background: #EFF6FF;
+  color: #1D4ED8;
+  padding: 14rpx 28rpx;
+  font-size: 23rpx;
+  border-bottom: 1rpx solid #DBEAFE;
+}
+
+.tip-icon {
+  margin-right: 10rpx;
+}
+
+.main-content {
+  padding: 24rpx 28rpx;
+}
+
+.mode-badge {
+  font-size: 20rpx;
+  color: #0284C7;
+  background: #E0F2FE;
+  padding: 4rpx 14rpx;
+  border-radius: 20rpx;
+  font-weight: 500;
+}
+
+/* 微信标准表单行 */
+.form-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+  margin-bottom: 24rpx;
+}
+
+.form-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #F8FAFC;
+  border: 1rpx solid #E2E8F0;
+  border-radius: 14rpx;
+  padding: 16rpx 22rpx;
+}
+
+.form-label {
+  font-size: 26rpx;
+  color: #475569;
+}
+
+.input-wrap {
+  display: flex;
+  align-items: center;
+}
+
+.cell-input {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #0F172A;
+  text-align: right;
+  width: 140rpx;
+  margin-right: 10rpx;
+}
+
+.unit-text {
+  font-size: 24rpx;
+  color: #94A3B8;
+}
+
+/* 测算看板 */
+.result-box {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: #F1F5F9;
+  border-radius: 16rpx;
+  padding: 22rpx 10rpx;
+  margin-bottom: 20rpx;
+}
+
+.res-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.r-label {
+  font-size: 20rpx;
+  color: #64748B;
+  margin-bottom: 4rpx;
+}
+
+.r-val {
+  font-size: 36rpx;
+  font-weight: bold;
+}
+
+.text-blue {
+  color: #0284C7;
+}
+
+.text-amber {
+  color: #D97706;
+}
+
+.text-dark {
+  color: #1E293B;
+}
+
+.r-unit {
+  font-size: 22rpx;
+  font-weight: normal;
+  color: #64748B;
+}
+
+.r-split {
+  width: 1rpx;
+  height: 40rpx;
+  background: #CBD5E1;
+}
+
+/* 状态提示 */
+.status-alert {
+  padding: 18rpx 20rpx;
+  border-radius: 14rpx;
+  font-size: 24rpx;
+  line-height: 1.45;
+}
+
+.alert-danger {
+  background: #FEF2F2;
+  border: 1rpx solid #FCA5A5;
+  color: #991B1B;
+}
+
+.alert-success {
+  background: #ECFDF5;
+  border: 1rpx solid #6EE7B7;
+  color: #065F46;
+}
+
+.bold-red {
+  color: #DC2626;
+  font-weight: bold;
+}
+
+/* 防御卡片 */
+.defense-card {
+  display: flex;
+  flex-direction: column;
+  gap: 18rpx;
+}
+
+.defense-img {
+  width: 100%;
+  height: 240rpx;
+  border-radius: 16rpx;
+}
+
+.defense-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+}
+
+.point-row {
+  display: flex;
+  align-items: flex-start;
+  font-size: 24rpx;
+  line-height: 1.45;
+  color: #334155;
+}
+
+.p-dot {
+  color: #0284C7;
+  font-weight: bold;
+  margin-right: 8rpx;
+}
+
+.p-text {
+  flex: 1;
+}
+
+/* 应急直通按钮 */
+.emergency-cta-btn {
+  display: flex;
+  align-items: center;
+  background: linear-gradient(135deg, #0284C7 0%, #0369A1 100%);
+  color: #FFFFFF;
+  padding: 24rpx 28rpx;
+  border-radius: 20rpx;
+  box-shadow: 0 6rpx 20rpx rgba(2, 132, 199, 0.3);
+}
+
+.btn-icon {
+  font-size: 40rpx;
+  margin-right: 18rpx;
+}
+
+.btn-text-box {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.btn-main {
+  font-size: 28rpx;
+  font-weight: bold;
+  margin-bottom: 4rpx;
+}
+
+.btn-sub {
+  font-size: 21rpx;
+  color: #BAE6FD;
+}
+
+.btn-arrow {
+  font-size: 24rpx;
+  font-weight: bold;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 8rpx 16rpx;
+  border-radius: 20rpx;
+}
